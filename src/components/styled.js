@@ -14,6 +14,12 @@ const Button = styled.a`
   }
 `;
 
+const PrimaryButton = styled(Button)`
+  background-color: #00aecc;
+  border-radius: 50px;
+  padding: 6px 32px 7px;
+`;
+
 const SecondaryButton = styled(Button)`
   background-color: #00aecc;
   border-radius: 4px;
@@ -46,7 +52,7 @@ const TertiaryButton = styled(Button)`
 `;
 
 const TextInput = styled.input.attrs(() => ({
-  type: 'input'
+  type: 'text'
 }))`
   background-color: inherit;
   color: #36475b;
@@ -93,6 +99,7 @@ const IconWrapper = styled.i`
 
 export {
   Button,
+  PrimaryButton,
   SecondaryButton,
   TranslucentButton,
   TertiaryButton,

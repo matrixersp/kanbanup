@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import 'app/App.css';
 import Header from 'components/Header';
-import BoardHeader from 'features/board/BoardHeader';
-import Lists from 'features/list/Lists';
-import EditCardPopup from 'features/card/EditCardPopup';
-import Overlay from 'components/Overlay';
+import Signup from 'pages/Signup';
+import Login from 'pages/Login';
+import Home from 'pages/Home';
 
 import { fetchBoard } from 'app/appSlice';
-import ListActions from 'features/list/listActions';
 import { toggleListActions } from 'app/appSlice';
 import { isNonEmptyObject } from 'helpers/dom';
 
@@ -24,13 +23,6 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   background: rgb(0, 174, 204);
-`;
-
-const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  flex: 1 1 auto;
 `;
 
 export default function App() {
@@ -47,18 +39,14 @@ export default function App() {
 
   return (
     <Root>
-      <Header onClick={clearPopup} />
-      <Main onClick={clearPopup}>
-        <BoardHeader />
-        <section
-          style={{ position: 'relative', height: '100%', overflowX: 'auto' }}
-        >
-          <Lists />
-        </section>
-        <EditCardPopup />
-      </Main>
-      <Overlay />
-      <ListActions />
+      <Router>
+        <Header onClick={clearPopup} />
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/" component={Home} />
+        </Switch>
+      </Router>
     </Root>
   );
 }

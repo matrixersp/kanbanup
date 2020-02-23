@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Button, TranslucentButton } from 'components/styled';
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -32,13 +33,23 @@ const Brand = styled.a`
   }
 `;
 
+const LoginButton = styled(Button)`
+  margin-left: auto;
+`;
+const SignupButton = styled(TranslucentButton)`
+  margin-left: 12px;
+  padding: 4px 14px 6px;
+`;
+
 export default function Header() {
   return (
     <HeaderWrapper>
-      <Brand href="#">
+      <Brand href="/">
         <h1>K</h1>
         <span style={{ marginTop: '-2px' }}>anbored</span>
       </Brand>
+      <LoginButton href="/login">Sign In</LoginButton>
+      <SignupButton href="/signup">Sign Up</SignupButton>
     </HeaderWrapper>
   );
 }
