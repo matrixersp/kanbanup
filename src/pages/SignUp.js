@@ -1,8 +1,12 @@
 import React from 'react';
 import { TextInput, Button, PrimaryButton } from 'components/styled';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { signUp } from 'features/user/userSlice';
+import { useHistory } from 'react-router-dom';
 
-const Container = styled.div`
+const Container = styled.form`
   display: block;
   margin: 40px auto;
   text-align: center;
@@ -16,7 +20,7 @@ const Title = styled.h1`
   font-weight: normal;
   font-size: 24px;
   color: #36475b;
-  margin: 16px 0 20px;
+  margin: 16px 0 24px;
 `;
 
 const NameInput = styled(TextInput)`
@@ -42,6 +46,11 @@ const JoinButton = styled(PrimaryButton)`
   display: inline-block;
   margin-top: 2px;
   margin-bottom: 12px;
+  border: none;
+  &:focus {
+    background-color: #00aecc;
+    border: none;
+  }
 `;
 
 const LoginLink = styled(Button)`
@@ -50,13 +59,23 @@ const LoginLink = styled(Button)`
 `;
 
 export default function Register() {
+  const dispatch = useDispatch();
+  const { register, handleSubmit } = useForm();
+  const history = useHistory();
+
+  const handleSignup = data => {
+    data.repeatPassword = data.password;
+    dispatch(signUp(data));
+    history.push('/boards');
+  };
+
   return (
-    <Container>
-      <Title>Sign Up</Title>
-      <NameInput placeholder="Full name" />
-      <EmailInput placeholder="Email" />
-      <PasswordInput placeholder="Password" />
-      <JoinButton>Join Now</JoinButton>
+    <Container onSubmit={handleSubmit(handleSignup)}>
+      <Title>Create your account</Title>
+      <NameInput name="name" placeholder="Full name" ref={register} />
+      <EmailInput name="email" placeholder="Email" ref={register} />
+      <PasswordInput name="password" placeholder="Password" ref={register} />
+      <JoinButton as="input" type="submit" value="Sign Up" />
       <div
         style={{
           color: '#36475b',

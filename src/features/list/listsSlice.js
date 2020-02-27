@@ -2,8 +2,9 @@ import axios from 'axios';
 import { combineReducers } from 'redux';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchSuccess } from 'features/board/boardSlice';
+import { fetchSuccess, fetchBoardSuccess } from 'features/board/boardSlice';
 import { cardAdded, cardDeleted } from 'features/card/cardsSlice';
+import { BASE_URL } from 'helpers/constants';
 
 const listsById = createSlice({
   name: 'listsById',
@@ -29,7 +30,7 @@ const listsById = createSlice({
     }
   },
   extraReducers: {
-    [fetchSuccess](state, { payload }) {
+    [fetchBoardSuccess](state, { payload }) {
       return payload.lists.byId;
     },
     [cardAdded](state, { payload }) {
@@ -56,6 +57,9 @@ const listIds = createSlice({
   initialState: [],
   reducers: {},
   extraReducers: {
+    [fetchBoardSuccess](state, { payload }) {
+      return payload.lists.ids;
+    },
     [fetchSuccess](state, { payload }) {
       return payload.lists.ids;
     },
@@ -70,24 +74,24 @@ const listIds = createSlice({
 });
 
 export const saveListTitle = (id, boardId, title) =>
-  axios.put('http://localhost:5000/api/lists/' + id, { boardId, title });
+  axios.patch(`${BASE_URL}/lists/${id}`, { boardId, title });
 
 export const addList = (boardId, title) => dispatch => {
   axios
-    .post('http://localhost:5000/api/lists/', { boardId, title })
+    .post(`${BASE_URL}/lists`, { boardId, title })
     .then(res => dispatch(listAdded(res.data)));
 };
 
 export const deleteList = (id, boardId) => dispatch => {
   axios
-    .delete('http://localhost:5000/api/lists/' + id, { data: { boardId } })
+    .delete(`${BASE_URL}/lists/${id}`, { data: { boardId } })
     .then(() => dispatch(listDeleted(id)))
     .catch(err => console.log(err));
 };
 
 export const moveCard = (draggableId, source, destination) => dispatch => {
   dispatch(cardMoved({ draggableId, source, destination }));
-  axios.put('http://localhost:5000/api/cards/' + draggableId, {
+  axios.patch(`${BASE_URL}/cards/${draggableId}`, {
     source: { listId: source.droppableId, index: source.index },
     destination: { listId: destination.droppableId, index: source.index }
   });

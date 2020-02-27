@@ -7,14 +7,13 @@ import { DeleteIcon } from 'components/Icons';
 import { saveCardTitle, deleteCard } from 'features/card/cardsSlice';
 import { changeCardTitle } from 'app/appSlice';
 
-const SaveButton = styled(SecondaryButton)`
-  width: fit-content;
-  padding: 8px 18px;
-  opacity: 1;
-  transition: none;
-  :hover {
-    background-color: #009fbd;
-  }
+const Container = styled.div`
+  position: absolute;
+  top: ${props => props.offsetTop};
+  left: ${props => props.offsetLeft};
+  visibility: ${props => (props.offsetTop ? 'visible' : 'hidden')};
+  width: 258px;
+  z-index: 3;
 `;
 
 const CardTextArea = styled(TextArea)`
@@ -23,13 +22,14 @@ const CardTextArea = styled(TextArea)`
   margin-bottom: 8px;
 `;
 
-const StyledEditCardPopup = styled.div`
-  position: absolute;
-  top: ${props => props.offsetTop};
-  left: ${props => props.offsetLeft};
-  visibility: ${props => (props.offsetTop ? 'visible' : 'hidden')};
-  width: 258px;
-  z-index: 3;
+const SaveButton = styled(SecondaryButton)`
+  width: fit-content;
+  padding: 8px 18px;
+  opacity: 1;
+  transition: none;
+  :hover {
+    background-color: #009fbd;
+  }
 `;
 
 export default function EditCardPopup() {
@@ -45,29 +45,27 @@ export default function EditCardPopup() {
   const { _id, listId, title, offsetTop, offsetLeft } = card;
 
   return (
-    <div>
-      <StyledEditCardPopup offsetTop={offsetTop} offsetLeft={offsetLeft}>
-        <CardTextArea
-          ref={inputRef}
-          value={title || ''}
-          onChange={e => dispatch(changeCardTitle(e.target.value))}
-        />
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between'
-          }}
-        >
-          <SaveButton onClick={() => dispatch(saveCardTitle(_id, card.title))}>
-            Save
-          </SaveButton>
-          <IconWrapper onClick={() => dispatch(deleteCard(_id, listId))}>
-            <DeleteIcon />
-          </IconWrapper>
-        </div>
-      </StyledEditCardPopup>
-    </div>
+    <Container offsetTop={offsetTop} offsetLeft={offsetLeft}>
+      <CardTextArea
+        ref={inputRef}
+        value={title || ''}
+        onChange={e => dispatch(changeCardTitle(e.target.value))}
+      />
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}
+      >
+        <SaveButton onClick={() => dispatch(saveCardTitle(_id, card.title))}>
+          Save
+        </SaveButton>
+        <IconWrapper onClick={() => dispatch(deleteCard(_id, listId))}>
+          <DeleteIcon />
+        </IconWrapper>
+      </div>
+    </Container>
   );
 }
 

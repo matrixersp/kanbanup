@@ -1,17 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
+import history from 'helpers/history';
 
 import 'app/App.css';
 import Header from 'components/Header';
-import Signup from 'pages/Signup';
+import SignUp from 'pages/SignUp';
 import Login from 'pages/Login';
-import Home from 'pages/Home';
+import Board from 'pages/Board';
+import Boards from 'pages/Boards';
+import HomePublic from 'pages/HomePublic';
+import NotFound from 'pages/NotFound';
 
-import { fetchBoard } from 'app/appSlice';
 import { toggleListActions } from 'app/appSlice';
 import { isNonEmptyObject } from 'helpers/dom';
+import { setAuthorizationHeader } from 'helpers/headers';
 
 const Root = styled.div`
   position: relative;
@@ -27,25 +31,44 @@ const Root = styled.div`
 
 export default function App() {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchBoard());
-  }, [dispatch]);
+  const token = useSelector(state => state.user.token);
+  const isLoading = useSelector(state => state.user.isLoading);
 
   const listActions = useSelector(state => state.app.listActions);
   const clearPopup = () => {
     if (isNonEmptyObject(listActions)) dispatch(toggleListActions());
   };
+  setAuthorizationHeader();
 
   return (
     <Root>
-      <Router>
-        <Header onClick={clearPopup} />
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/" component={Home} />
-        </Switch>
+      <Router history={history}>
+        {isLoading && !token ? (
+          <h1>Sign In...</h1>
+        ) : (
+          <>
+            <Header onClick={clearPopup} />
+            {token ? (
+              <Switch>
+                <Route exact path="/boards" component={Boards} />
+                <Route exact path="/boards/:id" component={Board} />
+                <Route exact path="/">
+                  <Redirect to="/boards" />
+                </Route>
+                <Route path="/404" component={NotFound} />
+                <Redirect to="/404" />
+              </Switch>
+            ) : (
+              <Switch>
+                <Route exact path="/signup" component={SignUp} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/" component={HomePublic} />
+                <Route path="/404" component={NotFound} />
+                <Redirect to="/404" />
+              </Switch>
+            )}
+          </>
+        )}
       </Router>
     </Root>
   );

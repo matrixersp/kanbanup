@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Button, TranslucentButton } from 'components/styled';
+import { useHistory } from 'react-router-dom';
+import { logout } from 'app/appSlice';
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -36,20 +39,41 @@ const Brand = styled.a`
 const LoginButton = styled(Button)`
   margin-left: auto;
 `;
+
 const SignupButton = styled(TranslucentButton)`
   margin-left: 12px;
   padding: 4px 14px 6px;
 `;
 
+const LogoutButton = styled(Button)`
+  margin-left: auto;
+`;
+
 export default function Header() {
+  const token = useSelector(state => state.user.token);
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    localStorage.clear();
+    dispatch(logout());
+    history.push('/login');
+  };
+
   return (
     <HeaderWrapper>
       <Brand href="/">
         <h1>K</h1>
         <span style={{ marginTop: '-2px' }}>anbored</span>
       </Brand>
-      <LoginButton href="/login">Sign In</LoginButton>
-      <SignupButton href="/signup">Sign Up</SignupButton>
+      {token ? (
+        <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
+      ) : (
+        <>
+          <LoginButton href="/login">Sign In</LoginButton>
+          <SignupButton href="/signup">Sign Up</SignupButton>
+        </>
+      )}
     </HeaderWrapper>
   );
 }

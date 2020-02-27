@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { combineReducers } from 'redux';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchSuccess } from 'features/board/boardSlice';
+import { fetchSuccess, fetchBoardSuccess } from 'features/board/boardSlice';
+import { BASE_URL } from 'helpers/constants';
 
 const cardsById = createSlice({
   name: 'cardsById',
@@ -18,6 +19,9 @@ const cardsById = createSlice({
     }
   },
   extraReducers: {
+    [fetchBoardSuccess](state, { payload }) {
+      return payload.cards.byId;
+    },
     [fetchSuccess](state, { payload }) {
       return payload.cards.byId;
     }
@@ -31,6 +35,9 @@ const cardIds = createSlice({
   initialState: [],
   reducers: {},
   extraReducers: {
+    [fetchBoardSuccess](state, { payload }) {
+      return payload.cards.ids;
+    },
     [fetchSuccess](state, { payload }) {
       return payload.cards.ids;
     },
@@ -45,24 +52,19 @@ const cardIds = createSlice({
 });
 
 export const saveCardTitle = (id, title) => dispatch => {
-  axios
-    .put('http://localhost:5000/api/cards/' + id, { title })
-    .then((res, err) => {
-      console.log(res.data, err);
-      dispatch(cardTitleSaved({ id, title: res.data.title }));
-    });
+  axios.patch(`${BASE_URL}/cards/${id}`, { title }).then((res, err) => {
+    dispatch(cardTitleSaved({ id, title: res.data.title }));
+  });
 };
 
 export const addCard = (listId, boardId, title) => dispatch => {
-  axios
-    .post('http://localhost:5000/api/cards/', { listId, boardId, title })
-    .then(res => {
-      dispatch(cardAdded({ ...res.data }));
-    });
+  axios.post(`${BASE_URL}/cards`, { listId, boardId, title }).then(res => {
+    dispatch(cardAdded(res.data));
+  });
 };
 
 export const deleteCard = (id, listId) => dispatch => {
-  axios.delete('http://localhost:5000/api/cards/' + id).then(() => {
+  axios.delete(`${BASE_URL}/cards/${id}`).then(() => {
     dispatch(cardDeleted({ id, listId }));
   });
 };

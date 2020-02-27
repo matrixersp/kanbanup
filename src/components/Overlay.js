@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { IconWrapper } from 'components/styled';
 import { CancelIcon } from 'components/Icons';
-import { toggleCardActions } from 'app/appSlice';
-import { isNonEmptyObject } from 'helpers/dom';
 
 const OverlayStyled = styled.div`
   visibility: ${props => (props.isVisible ? 'visible' : 'hidden')};
@@ -19,24 +17,15 @@ const OverlayStyled = styled.div`
 `;
 
 export default function Overlay() {
-  const isVisible = useSelector(state =>
-    isNonEmptyObject(state.app.cardActions)
-  );
+  const isVisible = useSelector(state => state.app.hasOverlay);
 
   const dispatch = useDispatch();
 
   return (
-    <OverlayStyled
-      isVisible={isVisible}
-      onClick={() => dispatch(toggleCardActions())}
-    >
+    <OverlayStyled isVisible={isVisible} onClick={() => dispatch()}>
       <IconWrapper style={{ position: 'absolute', top: '12px', right: '12px' }}>
         <CancelIcon width="38" height="38" />
       </IconWrapper>
     </OverlayStyled>
   );
 }
-
-Overlay.propTypes = {
-  isEditing: PropTypes.bool
-};

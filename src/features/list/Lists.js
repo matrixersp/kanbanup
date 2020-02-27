@@ -40,7 +40,6 @@ export default function Lists() {
 
   const handleDragEnd = result => {
     const { draggableId, source, destination } = result;
-    console.log(result);
 
     if (!destination) return;
     if (
