@@ -64,7 +64,7 @@ export default function Header() {
     <HeaderWrapper>
       <Brand href="/">
         <h1>K</h1>
-        <span style={{ marginTop: '-2px' }}>anbored</span>
+        <span style={{ marginTop: '-2px' }}>anbello</span>
       </Brand>
       {token ? (
         <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
