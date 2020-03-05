@@ -90,10 +90,11 @@ export const deleteList = (id, boardId) => dispatch => {
 };
 
 export const moveCard = (draggableId, source, destination) => dispatch => {
+  console.log(draggableId, source, destination);
   dispatch(cardMoved({ draggableId, source, destination }));
   axios.patch(`${BASE_URL}/cards/${draggableId}`, {
     source: { listId: source.droppableId, index: source.index },
-    destination: { listId: destination.droppableId, index: source.index }
+    destination: { listId: destination.droppableId, index: destination.index }
   });
 };
 
