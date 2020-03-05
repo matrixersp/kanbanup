@@ -6,17 +6,23 @@ import { useForm } from 'react-hook-form';
 import { signUp } from 'features/user/userSlice';
 
 const Container = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-direction: row;
   margin: 0 auto;
-  width: 820px;
-  margin-top: 20px;
+  width: 48em;
   color: #36475b;
 `;
 
 const Hero = styled.section`
   text-align: justify;
-  margin-right: 80px;
+  text-align: center;
+  margin-right: 4rem;
 `;
 
 const GetStarted = styled.section``;
@@ -25,34 +31,35 @@ const Form = styled.form`
   width: fit-content;
   display: inline-block;
   text-align: center;
-  border-radius: 4px;
-  padding: 0 18px;
+  border-radius: 0.25rem;
+  padding: 0 1.6rem;
   background-color: white;
 `;
 
 const Title = styled.h1`
   font-family: 'Source Sans Pro';
   font-weight: normal;
-  margin-bottom: 20px;
-  font-size: 32px;
+  font-size: 1.6rem;
+  color: ${({ theme }) => theme.primaryTextColor || '#36475b'};
+  margin: 1rem 0 1.4rem;
 `;
 
 const FormTitle = styled.h2`
   font-family: 'Source Sans Pro';
   font-weight: normal;
   color: #36475b;
-  margin: 16px 0 24px;
+  margin: 1rem 0 1.6rem;
 `;
 
 const NameInput = styled(TextInput)`
-  width: 272px;
+  width: 18rem;
   font-weight: normal;
-  font-size: 15px;
-  padding: 8px;
+  font-size: 1rem;
+  padding: 0.5rem;
   display: block;
-  margin-bottom: 12px;
-  border: 2px solid #f1f1f1;
-  border-radius: 4px;
+  margin-bottom: 0.8rem;
+  border: 0.125rem solid #f1f1f1;
+  border-radius: 0.25rem;
 `;
 
 const EmailInput = styled(NameInput).attrs(() => ({
@@ -65,8 +72,8 @@ const PasswordInput = styled(NameInput).attrs(() => ({
 
 const JoinButton = styled(PrimaryButton)`
   display: inline-block;
-  margin-top: 2px;
-  margin-bottom: 12px;
+  margin-top: 0.125rem;
+  margin-bottom: 0.75rem;
   border: none;
   &:focus {
     background-color: #00aecc;
@@ -75,7 +82,7 @@ const JoinButton = styled(PrimaryButton)`
 `;
 
 const LoginLink = styled(Button)`
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #00aecc;
 `;
 
@@ -111,8 +118,8 @@ export default function Register() {
           <div
             style={{
               color: '#36475b',
-              fontSize: '12px',
-              marginBottom: '12px'
+              fontSize: '0.75rem',
+              marginBottom: '0.75rem'
             }}
           >
             Already a member? <LoginLink href="/login">Sign In</LoginLink>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   font-family: 'Source Sans Pro';
   color: #36475b;
-  margin: 30px auto;
+  margin: 2rem auto;
   h1 {
     font-weight: normal;
   }

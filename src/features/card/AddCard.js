@@ -10,15 +10,18 @@ import { addCard } from 'features/card/cardsSlice';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: initial;
 `;
 
 const CardTextArea = styled(TextArea)`
-  margin-bottom: 6px;
+  margin-bottom: 0.4rem;
   width: 100%;
-  border: 2px solid #00aecc;
+  border: 0.125rem solid #00aecc;
 `;
 
-const AddCardButton = styled(SecondaryButton)``;
+const AddCardButton = styled(SecondaryButton)`
+  margin-right: 1rem;
+`;
 
 function NewCard() {
   const boardId = useSelector(state => state.board._id);

@@ -4,10 +4,16 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import App from 'app/App';
 import store from 'app/store';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './theme';
+import GlobalStyles from './globalStyles';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <App />
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 );

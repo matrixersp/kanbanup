@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 const Button = styled.a`
-  color: #fff;
+  color: ${({ theme }) => theme.secondaryTextColor || '#fff'};
   text-decoration: none;
   line-height: 1.5;
   cursor: pointer;
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.bodyFontSize || '1rem'};
   opacity: 0.9;
   transition: all 0.2s ease;
   user-select: none;
@@ -15,26 +15,28 @@ const Button = styled.a`
 `;
 
 const PrimaryButton = styled(Button)`
-  background-color: #00aecc;
-  border-radius: 50px;
-  padding: 6px 32px 7px;
+  background-color: ${({ theme }) => theme.primaryBgColor};
+  border-radius: ${({ theme }) => theme.primaryBorderRadius || '10rem'};
+  padding: 0.4rem 2rem 0.45rem;
 `;
 
 const SecondaryButton = styled(Button)`
-  background-color: #00aecc;
-  border-radius: 4px;
-  padding: 5px 18px 6px;
+  background-color: ${({ theme }) => theme.primaryBgColor || '#00aecc'};
+  border-radius: 0.25rem;
+  padding: 0.4rem 1rem 0.45rem;
 `;
 
 const TranslucentButton = styled(Button)`
-  background: rgba(255, 255, 255, 0.36);
-  padding: 6px 14px 8px;
+  background-color: ${({ theme }) =>
+    theme.translucentButtonBgColor || 'rgba(255, 255, 255, 0.36)'};
+  border-radius: 0.25rem;
+  padding: 0.4rem 2rem 0.45rem;
   text-align: center;
-  font-size: 16px;
-  border-radius: 4px;
+  font-size: 1rem;
+  border-radius: 0.25rem;
   opacity: 1;
   &:hover {
-    background: rgba(255, 255, 255, 0.46);
+    background-color: rgba(255, 255, 255, 0.46);
   }
 `;
 
@@ -42,9 +44,9 @@ const TertiaryButton = styled(Button)`
   display: flex;
   align-items: center;
   color: #fff;
-  padding: 4px 6px;
+  padding: 0.25rem 0.4rem;
   background-color: rgba(242, 242, 243, 0.28);
-  border-radius: 4px;
+  border-radius: 0.25rem;
   opacity: 1;
   &:hover {
     background-color: rgba(242, 242, 243, 0.4);
@@ -55,41 +57,40 @@ const TextInput = styled.input.attrs(() => ({
   type: 'text'
 }))`
   background-color: inherit;
-  color: #36475b;
+  color: ${({ theme }) => theme.primaryTextColor || '#36475b'};
   outline: none;
-  font-size: 17px;
+  font-size: ${({ theme }) => theme.bodyFontSize || '1rem'};
   font-weight: bold;
-  padding: 4px 6px;
-  border-radius: 4px;
-  border: 2px solid transparent;
+  padding: 0.25rem 0.4rem;
+  border-radius: 0.25rem;
+  border: 0.125rem solid transparent;
   cursor: pointer;
   &:focus {
-    border: 2px solid #00aecc;
+    border: 0.125rem solid #00aecc;
     background-color: #fff;
   }
 `;
 
 const TextArea = styled.textarea`
-  color: #36475b;
+  color: ${({ theme }) => theme.primaryTextColor || '#36475b'};
   outline: none;
-  font-size: 16px;
-  padding: 4px 6px;
-  margin-bottom: 6px;
-  border-radius: 4px;
-  line-height: 1.5;
-  border: 2px solid transparent;
+  font-size: ${({ theme }) => theme.bodyFontSize || '1rem'};
+  padding: 0.25rem 0.4rem;
+  margin-bottom: 0.4rem;
+  border-radius: 0.25rem;
+  line-height: 1.4;
+  border: 0.125rem solid transparent;
   resize: none;
   &:focus {
-    border: 2px solid #00aecc;
+    border: 0.125rem solid #00aecc;
     user-select: all;
   }
 `;
 
 const IconWrapper = styled.i`
-  margin-left: 14px;
   opacity: 0.7;
+  cursor: pointer;
   svg {
-    margin: 0 auto;
     vertical-align: middle;
   }
   &:hover {

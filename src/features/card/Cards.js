@@ -15,16 +15,15 @@ const CardsWrapper = styled.div`
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 4px;
-  min-height: 10px;
+  padding-right: 0.25rem;
+  min-height: 0.8rem;
 `;
 
 const AddCardButton = styled(TertiaryButton)`
-  margin-top: 3px;
+  margin-top: 0.25rem;
   width: 100%;
   overflow: hidden;
   color: #36475b;
-  margin-right: 8px;
   opacity: 0.7;
   &:hover {
     background: #e0e0e1;
@@ -61,10 +60,15 @@ export default function Cards({ listId }) {
           </CardsWrapper>
         )}
       </Droppable>
-      <div style={{ paddingRight: '8px' }}>
+      <div style={{ paddingRight: '.5rem' }}>
         {!isAddCard && (
           <AddCardButton onClick={() => dispatch(toggleAddCard(listId))}>
-            <AddIcon width="18" height="18" style={{ fill: '#36475b' }} />
+            <AddIcon
+              style={{
+                fill: '#364756',
+                marginRight: '0.35rem'
+              }}
+            />
             {cards.length > 0 ? 'Add another card' : 'Add a card'}
           </AddCardButton>
         )}

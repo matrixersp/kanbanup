@@ -85,7 +85,7 @@ export const fetchBoard = id => dispatch => {
     })
     .catch(err => {
       dispatch(fetchBoardStart(err.response.data));
-      history.push('/404');
+      history.push({ state: '404' });
     });
 };
 

@@ -7,27 +7,31 @@ import { CancelIcon } from 'components/Icons';
 import { toggleAddList } from 'app/appSlice';
 import { addList } from 'features/list/listsSlice';
 
-const Title = styled(TextArea)`
-  font-weight: Bold;
-  width: 100%;
-  min-height: 34px;
-  height: 34px;
-  overflow: hidden;
-  border: 2px solid #00aecc;
-  background: #fff;
-`;
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 272px;
+  min-width: 17.2rem;
   background-color: #f1f4f3;
-  border-radius: 3px;
-  margin-left: 10px;
+  border-radius: 0.188rem;
+  margin: 0 0.5rem;
   color: #444444;
-  border: 1px solid #f5f5f5;
+  border: 0.063rem solid #f5f5f5;
   max-height: 100%;
-  padding: 4px;
+  padding: 0.25rem;
+`;
+
+const Title = styled(TextArea)`
+  font-weight: Bold;
+  width: 100%;
+  height: 2rem;
+  padding: 0.125rem 0.4rem;
+  overflow: hidden;
+  border: 0.125rem solid #00aecc;
+  background: #fff;
+`;
+
+const AddListButton = styled(SecondaryButton)`
+  margin-right: 1rem;
 `;
 
 function NewList() {
@@ -64,7 +68,7 @@ function NewList() {
         }}
       />
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <SecondaryButton onClick={handleAddList}>Add</SecondaryButton>
+        <AddListButton onClick={handleAddList}>Add</AddListButton>
         <IconWrapper onClick={handleToggleAddList}>
           <CancelIcon style={{ fill: '#00aecc' }} />
         </IconWrapper>

@@ -15,18 +15,18 @@ const ListsWrapper = styled.div`
   top: 0;
   bottom: 0;
   left: 0;
-  padding-left: 2px;
-  padding-right: 2px;
+  padding-left: 0.125rem;
+  padding-right: 0.125rem;
   display: flex;
   align-items: flex-start;
   flex: 1 1 auto;
-  padding-bottom: 22px;
+  padding-bottom: 2.125rem;
 `;
 
 const AddListButton = styled(TertiaryButton)`
-  width: 272px;
-  margin: 0 8px;
-  padding: 9px;
+  width: 17.2rem;
+  margin: 0 0.5rem;
+  padding: 0.55rem;
 `;
 
 export default function Lists() {
@@ -61,7 +61,7 @@ export default function Lists() {
           <AddList />
         ) : (
           <AddListButton onClick={() => dispatch(toggleAddList())}>
-            <AddIcon width="18" height="18" />
+            <AddIcon style={{ marginRight: '0.35rem' }} />
             {lists.length > 0 ? 'Add another list' : 'Add a list'}
           </AddListButton>
         )}

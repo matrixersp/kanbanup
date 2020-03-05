@@ -15,14 +15,14 @@ const Container = styled.div`
   pointer-events: auto;
   display: flex;
   flex-direction: column;
-  width: 272px;
+  width: 17.2rem;
   background-color: #f2f2f3;
-  border-radius: 4px;
-  margin-left: 8px;
+  border-radius: ${({ theme }) => theme.borderRadius || '.25rem'};
+  margin-left: ${({ theme }) => theme.spacerSm || '.5rem'};
   color: #444444;
-  min-height: 65px;
+  min-height: 6rem;
   max-height: 100%;
-  padding: 6px 4px 6px 8px;
+  padding: 0.3rem 0.2rem 0.3rem 0.5rem;
   cursor: pointer;
 `;
 
@@ -30,22 +30,26 @@ const Title = styled(TextArea)`
   font-weight: Bold;
   background: transparent;
   width: 100%;
-  min-height: 34px;
-  height: 34px;
+  height: 2rem;
+  padding: 0.125rem 0.4rem;
   overflow: hidden;
   cursor: pointer;
 `;
 
 const EditList = styled(IconWrapper)`
-  margin-left: 4px;
-  margin-bottom: 6px;
+  margin: 0 0.1rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.3rem;
+  border-radius: 0.2rem;
+  opacity: 0.7;
   svg {
-    fill: rgba(54, 71, 91, 0.7);
-    padding: 6px;
+    width: 100%;
+    height: 100%;
+    fill: #36475b;
   }
-  &:hover svg {
-    background: rgba(32, 33, 36, 0.16);
-    background: rgba(54, 71, 91, 0.2);
+  &:hover {
+    background: #e0e0e1;
   }
 `;
 
@@ -87,7 +91,7 @@ export default function List({ list }) {
           onKeyPress={handleSaveListTitle}
         />
         <EditList onClick={handleToggleListActions}>
-          <EllipsisIcon width="32" height="32" />
+          <EllipsisIcon />
         </EditList>
       </div>
       <Cards listId={list._id} />
