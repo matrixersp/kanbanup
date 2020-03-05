@@ -7,6 +7,7 @@ import { deleteList } from 'features/list/listsSlice';
 import { toggleListActions } from 'app/appSlice';
 
 const ActionsMenu = styled.div`
+  color: ${theme => theme.primaryTextColor || '#36475b'};
   visibility: ${props => (props.offsetBottom ? 'visible' : 'hidden')};
   position: absolute;
   top: ${props => props.offsetBottom};

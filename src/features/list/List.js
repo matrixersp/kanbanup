@@ -30,6 +30,7 @@ const Title = styled(TextArea)`
   font-weight: Bold;
   background: transparent;
   width: 100%;
+  min-height: 2rem;
   height: 2rem;
   padding: 0.125rem 0.4rem;
   overflow: hidden;
@@ -74,7 +75,7 @@ export default function List({ list }) {
   };
 
   const handleSaveListTitle = e => {
-    if ((e.key === 'Enter' || e.type === 'blur') && e.target.value.trim()) {
+    if ((e.keyCode === 13 || e.type === 'blur') && e.target.value.trim()) {
       saveListTitle(list._id, boardId, e.target.value);
       e.target.blur();
     }
@@ -88,7 +89,7 @@ export default function List({ list }) {
           value={list.title}
           onChange={handleTitleChange}
           onBlur={handleSaveListTitle}
-          onKeyPress={handleSaveListTitle}
+          onKeyDown={handleSaveListTitle}
         />
         <EditList onClick={handleToggleListActions}>
           <EllipsisIcon />

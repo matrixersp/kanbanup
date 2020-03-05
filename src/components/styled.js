@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const Button = styled.a`
   color: ${({ theme }) => theme.secondaryTextColor || '#fff'};
   text-decoration: none;
+  display: inline-block;
   line-height: 1.5;
   cursor: pointer;
   font-size: ${({ theme }) => theme.bodyFontSize || '1rem'};
@@ -18,12 +19,19 @@ const PrimaryButton = styled(Button)`
   background-color: ${({ theme }) => theme.primaryBgColor};
   border-radius: ${({ theme }) => theme.primaryBorderRadius || '10rem'};
   padding: 0.4rem 2rem 0.45rem;
+  margin-top: 0.125rem;
+  margin-bottom: 0.8rem;
+  border: none;
+  &:focus {
+    background-color: #00aecc;
+    border: none;
+  }
 `;
 
 const SecondaryButton = styled(Button)`
   background-color: ${({ theme }) => theme.primaryBgColor || '#00aecc'};
   border-radius: 0.25rem;
-  padding: 0.4rem 1rem 0.45rem;
+  padding: 0.35rem 1rem;
 `;
 
 const TranslucentButton = styled(Button)`
@@ -98,6 +106,44 @@ const IconWrapper = styled.i`
   }
 `;
 
+const Form = styled.form`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  display: block;
+  text-align: center;
+  border-radius: 0.25rem;
+  padding: 0 1rem;
+  background-color: white;
+`;
+
+const FormTitle = styled.h2`
+  font-family: 'Source Sans Pro';
+  font-weight: normal;
+  font-size: 1.6rem;
+  color: ${({ theme }) => theme.primaryTextColor || '#36475b'};
+  margin: 1rem 0 1.4rem;
+`;
+
+const FormInput = styled.input.attrs(() => ({ type: 'text' }))`
+  outline: none;
+  color: ${({ theme }) => theme.primaryTextColor || '#36475b'};
+  width: 18rem;
+  font-weight: normal;
+  font-size: ${({ theme }) => theme.bodyFontSize || '1rem'};
+  padding: 0.5rem;
+  display: block;
+  margin-bottom: 0.8rem;
+  border: 0.125rem solid #f1f1f1;
+  border-radius: 0.25rem;
+  &:focus {
+    border: 0.125rem solid #00aecc;
+    background-color: #fff;
+  }
+`;
+
 export {
   Button,
   PrimaryButton,
@@ -106,5 +152,8 @@ export {
   TertiaryButton,
   TextInput,
   TextArea,
-  IconWrapper
+  IconWrapper,
+  Form,
+  FormTitle,
+  FormInput
 };
