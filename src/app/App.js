@@ -48,6 +48,7 @@ export default function App() {
               <Switch>
                 <Route exact path="/boards" component={Boards} />
                 <Route
+                  exact
                   path="/boards/:id"
                   component={({ location }) =>
                     location.state === '404' ? (
@@ -57,10 +58,10 @@ export default function App() {
                     )
                   }
                 />
-                <Route component={NotFound} />
                 <Route exact path="/">
                   <Redirect to="/boards" />
                 </Route>
+                <Route component={NotFound} />
               </Switch>
             ) : (
               <Switch>

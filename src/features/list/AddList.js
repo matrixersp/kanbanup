@@ -16,13 +16,13 @@ const Container = styled.div`
   margin: 0 0.5rem;
   color: #444444;
   border: 0.063rem solid #f5f5f5;
-  max-height: 100%;
   padding: 0.25rem;
 `;
 
 const Title = styled(TextArea)`
   font-weight: Bold;
   width: 100%;
+  min-height: 2rem;
   height: 2rem;
   padding: 0.125rem 0.4rem;
   overflow: hidden;
@@ -62,7 +62,7 @@ function NewList() {
         value={title}
         ref={inputRef}
         onChange={e => setTitle(e.target.value)}
-        onKeyPress={e => {
+        onKeyDown={e => {
           if (e.keyCode !== 13 || !e.target.value.trim()) return;
           handleAddList();
         }}

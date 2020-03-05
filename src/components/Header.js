@@ -46,7 +46,7 @@ const LoginButton = styled(Button)`
 
 const SignupButton = styled(TranslucentButton)`
   margin-left: 1.2rem;
-  padding: 0.2rem 1rem 0.4rem;
+  padding: 0.35rem 1rem;
 `;
 
 const LogoutButton = styled(Button)`
