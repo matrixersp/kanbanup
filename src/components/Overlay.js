@@ -16,16 +16,19 @@ const OverlayStyled = styled.div`
   background-color: rgba(0, 0, 0, 0.55);
 `;
 
-export default function Overlay() {
+export default function Overlay({ children }) {
   const isVisible = useSelector(state => state.app.hasOverlay);
 
   const dispatch = useDispatch();
 
   return (
     <OverlayStyled isVisible={isVisible} onClick={() => dispatch()}>
-      <IconWrapper style={{ position: 'absolute', top: '12px', right: '12px' }}>
-        <CancelIcon width="38" height="38" />
+      <IconWrapper
+        style={{ position: 'absolute', top: '.75rem', right: '.75rem' }}
+      >
+        <CancelIcon style={{ fill: '#fff' }} />
       </IconWrapper>
+      {children}
     </OverlayStyled>
   );
 }

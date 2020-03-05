@@ -5,12 +5,11 @@ import { Button, TranslucentButton } from 'components/styled';
 import { useHistory } from 'react-router-dom';
 import { logout } from 'app/appSlice';
 
-const HeaderWrapper = styled.header`
+const Container = styled.header`
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 3px 16px;
-  margin-bottom: 8px;
+  padding: 0.25rem 1rem;
   background-color: rgba(32, 33, 36, 0.36);
   font-family: 'Source Sans pro';
 `;
@@ -23,26 +22,31 @@ const Brand = styled.a`
     font-weight: 600;
     font-family: 'Roboto Slab';
     background-color: #f2f2f3;
-    padding: 1px 10px;
-    font-size: 28px;
+    padding: 0.2rem 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 1.8rem;
+    text-align: center;
     border-radius: 100%;
     color: rgb(0, 174, 204);
     display: inline;
+    margin: 0;
   }
   span {
-    font-size: 18px;
-    padding-left: 3px;
+    font-size: 1.1rem;
+    padding-left: 0.188rem;
     color: #f2f2f3;
   }
 `;
 
 const LoginButton = styled(Button)`
   margin-left: auto;
+  padding-bottom: 0.1rem;
 `;
 
 const SignupButton = styled(TranslucentButton)`
-  margin-left: 12px;
-  padding: 4px 14px 6px;
+  margin-left: 1.2rem;
+  padding: 0.2rem 1rem 0.4rem;
 `;
 
 const LogoutButton = styled(Button)`
@@ -61,10 +65,10 @@ export default function Header() {
   };
 
   return (
-    <HeaderWrapper>
+    <Container>
       <Brand href="/">
         <h1>K</h1>
-        <span style={{ marginTop: '-2px' }}>anbello</span>
+        <span style={{ marginTop: '-.125rem' }}>anbello</span>
       </Brand>
       {token ? (
         <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
@@ -74,6 +78,6 @@ export default function Header() {
           <SignupButton href="/signup">Sign Up</SignupButton>
         </>
       )}
-    </HeaderWrapper>
+    </Container>
   );
 }

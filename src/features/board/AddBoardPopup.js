@@ -14,7 +14,7 @@ const OverlayStyled = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: 2;
+  z-index: 1000;
   background-color: rgba(0, 0, 0, 0.55);
 `;
 
@@ -23,38 +23,37 @@ const Container = styled.form`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1004;
+  z-index: 1000;
   display: block;
-  margin: 40px auto;
   text-align: center;
-  border-radius: 4px;
-  padding: 0 18px;
+  border-radius: 0.25rem;
+  padding: 0 1rem;
   background-color: white;
 `;
 
 const Title = styled.h1`
   font-family: 'Source Sans Pro';
   font-weight: normal;
-  font-size: 24px;
-  color: #36475b;
-  margin: 16px 0 24px;
+  font-size: 1.6rem;
+  color: ${({ theme }) => theme.primaryTextColor || '#36475b'};
+  margin: 1rem 0 1.4rem;
 `;
 
 const TitleInput = styled(TextInput)`
-  width: 270px;
+  width: 18rem;
   font-weight: normal;
-  font-size: 15px;
-  padding: 8px;
+  font-size: 1rem;
+  padding: 0.5rem;
   display: block;
-  margin-bottom: 12px;
-  border: 2px solid #f1f1f1;
-  border-radius: 4px;
+  margin-bottom: 0.8rem;
+  border: 0.125rem solid #f1f1f1;
+  border-radius: 0.25rem;
 `;
 
 const AddButton = styled(PrimaryButton)`
   display: inline-block;
-  margin-top: 2px;
-  margin-bottom: 12px;
+  margin-top: 0.125rem;
+  margin-bottom: 0.8rem;
   border: none;
   &:focus {
     background-color: #00aecc;
@@ -89,9 +88,9 @@ export default function AddBoardPopup() {
     <OverlayStyled isVisible={isVisible} onClick={handleClosePopup}>
       <IconWrapper
         onClick={handleClosePopup}
-        style={{ position: 'absolute', top: '12px', right: '12px' }}
+        style={{ position: 'absolute', top: '0.4rem', right: '0.6rem' }}
       >
-        <CancelIcon width="38" height="38" />
+        <CancelIcon style={{ stroke: '#fff' }} />
       </IconWrapper>
       <Container
         onSubmit={handleAddBoard}

@@ -11,14 +11,13 @@ import { toggleCardActions } from 'app/appSlice';
 import { getScrollOffsetTop } from 'helpers/dom';
 
 const Container = styled.div`
-  user-select: none;
   position: relative;
   background-color: #fff;
-  color: #36475b;
-  padding: 6px 8px;
-  margin-bottom: 8px;
-  border-radius: 4px;
-  box-shadow: 0 2px 2px #dedede;
+  color: ${({ theme }) => theme.primaryTextColor || '#36475b'};
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.125rem #dedede;
   list-style: none;
   cursor: pointer;
   &:hover {
@@ -33,14 +32,20 @@ const Container = styled.div`
   }
 `;
 
+const Title = styled.span`
+  vertical-align: middle;
+  line-height: 1.4;
+`;
+
 const EditCard = styled(IconWrapper)`
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 0.15rem;
+  right: 0.18rem;
   visibility: hidden;
   z-index: 3;
   svg {
-    background: rgba(0, 174, 204, 0.9);
+    border-radius: 0.2rem;
+    background: rgba(0, 174, 204, 0.3);
   }
   &:hover svg {
     background: rgba(0, 174, 204, 1);
@@ -67,9 +72,15 @@ export default function Card({ card, index }) {
           ref={provided.innerRef}
         >
           <Container ref={cardRef}>
-            <span>{card.title}</span>
+            <Title>{card.title}</Title>
             <EditCard onClick={handleToggleCardActions}>
-              <EditIcon />
+              <EditIcon
+                style={{
+                  background: 'none',
+                  fontSize: '0.5rem',
+                  width: '1.2rem'
+                }}
+              />
             </EditCard>
           </Container>
         </div>

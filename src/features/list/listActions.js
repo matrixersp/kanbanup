@@ -12,8 +12,8 @@ const ActionsMenu = styled.div`
   top: ${props => props.offsetBottom};
   left: ${props => props.offsetLeft};
   background: #fff;
-  min-width: 248px;
-  box-shadow: 0 1px 6px 1px #777;
+  min-width: 15.5rem;
+  box-shadow: 0 0.063rem 0.375rem 0.063rem #777;
   z-index: 3;
 `;
 
@@ -21,7 +21,7 @@ const ActionsButton = styled(TertiaryButton)`
   background: #fff;
   width: 100%;
   border-radius: 0;
-  padding: 6px 8px;
+  padding: 0.4rem 0.5rem;
   color: #36475b;
   opacity: 0.9;
   transition: none;
@@ -36,11 +36,9 @@ const ActionsButton = styled(TertiaryButton)`
 
 const CloseActions = styled(IconWrapper)`
   position: absolute;
-  top: 6px;
-  right: 8px;
+  top: 0.25rem;
+  right: 0.25rem;
   & svg {
-    width: 22px;
-    height: 22px;
     fill: #36475b;
   }
 `;
@@ -48,9 +46,9 @@ const CloseActions = styled(IconWrapper)`
 const Hr = styled.hr`
   outline: none;
   border: 0;
-  border-top: 1px solid #e5e5e5;
-  margin-left: 8px;
-  margin-right: 8px;
+  border-top: 0.063rem solid #e5e5e5;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 `;
 
 export default function ListActions() {
@@ -67,14 +65,16 @@ export default function ListActions() {
   return (
     <ActionsMenu {...offsets}>
       <div style={{ display: 'flex' }}>
-        <span style={{ padding: '8px', margin: 'auto' }}>List Actions</span>
+        <span style={{ padding: '.5rem', margin: 'auto' }}>List Actions</span>
         <CloseActions onClick={() => dispatch(toggleListActions())}>
           <CancelIcon />
         </CloseActions>
       </div>
       <Hr />
       <ActionsButton onClick={handleDeleteList}>
-        <DeleteIcon width="18" height="18" />
+        <DeleteIcon
+          style={{ fill: '#fff', marginRight: '0.5rem', width: '1rem' }}
+        />
         Delete
       </ActionsButton>
     </ActionsMenu>

@@ -7,31 +7,34 @@ import { signUp } from 'features/user/userSlice';
 import { useHistory } from 'react-router-dom';
 
 const Container = styled.form`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
   display: block;
-  margin: 40px auto;
   text-align: center;
-  border-radius: 4px;
-  padding: 0 18px;
+  border-radius: 0.25rem;
+  padding: 0 1rem;
   background-color: white;
 `;
-
 const Title = styled.h1`
   font-family: 'Source Sans Pro';
   font-weight: normal;
-  font-size: 24px;
-  color: #36475b;
-  margin: 16px 0 24px;
+  font-size: 1.6rem;
+  color: ${({ theme }) => theme.primaryTextColor || '#36475b'};
+  margin: 1rem 0 1.4rem;
 `;
 
 const NameInput = styled(TextInput)`
-  width: 272px;
+  width: 18rem;
   font-weight: normal;
-  font-size: 15px;
-  padding: 8px;
+  font-size: 1rem;
+  padding: 0.5rem;
   display: block;
-  margin-bottom: 12px;
-  border: 2px solid #f1f1f1;
-  border-radius: 4px;
+  margin-bottom: 0.8rem;
+  border: 0.125rem solid #f1f1f1;
+  border-radius: 0.25rem;
 `;
 
 const EmailInput = styled(NameInput).attrs(() => ({
@@ -44,8 +47,8 @@ const PasswordInput = styled(NameInput).attrs(() => ({
 
 const JoinButton = styled(PrimaryButton)`
   display: inline-block;
-  margin-top: 2px;
-  margin-bottom: 12px;
+  margin-top: 0.125rem;
+  margin-bottom: 0.8rem;
   border: none;
   &:focus {
     background-color: #00aecc;
@@ -54,7 +57,7 @@ const JoinButton = styled(PrimaryButton)`
 `;
 
 const LoginLink = styled(Button)`
-  font-size: 12px;
+  font-size: 0.8rem;
   color: #00aecc;
 `;
 
@@ -79,8 +82,8 @@ export default function Register() {
       <div
         style={{
           color: '#36475b',
-          fontSize: '12px',
-          marginBottom: '12px'
+          fontSize: '.8rem',
+          marginBottom: '.8rem'
         }}
       >
         Already a member? <LoginLink href="/login">Sign In</LoginLink>

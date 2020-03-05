@@ -63,10 +63,13 @@ export const addCard = (listId, boardId, title) => dispatch => {
   });
 };
 
-export const deleteCard = (id, listId) => dispatch => {
-  axios.delete(`${BASE_URL}/cards/${id}`).then(() => {
-    dispatch(cardDeleted({ id, listId }));
-  });
+export const deleteCard = (id, listId, boardId) => dispatch => {
+  axios
+    .delete(`${BASE_URL}/cards/${id}`, { data: { listId, boardId } })
+    .then(() => {
+      dispatch(cardDeleted({ id, listId }));
+    })
+    .catch(err => console.log(err.reponse));
 };
 
 export default combineReducers({
