@@ -18,7 +18,7 @@ const Brand = styled.a`
   display: flex;
   text-decoration: none;
   align-items: center;
-  h1 {
+  h2 {
     font-weight: 600;
     font-family: 'Roboto Slab';
     background-color: #f2f2f3;
@@ -67,7 +67,7 @@ export default function Header() {
   return (
     <Container>
       <Brand href="/">
-        <h1>K</h1>
+        <h2>K</h2>
         <span style={{ marginTop: '-.125rem' }}>anbello</span>
       </Brand>
       {token ? (

@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import styled, { ThemeContext } from 'styled-components';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import history from 'helpers/history';
 
@@ -12,8 +12,6 @@ import Boards from 'pages/Boards';
 import HomePublic from 'pages/HomePublic';
 import NotFound from 'pages/NotFound';
 
-import { toggleListActions } from 'app/appSlice';
-import { isNonEmptyObject } from 'helpers/dom';
 import { setAuthorizationHeader } from 'helpers/headers';
 
 const Root = styled.div`
@@ -34,8 +32,6 @@ export default function App() {
 
   setAuthorizationHeader();
 
-  const themeContext = useContext(ThemeContext);
-  console.log(themeContext);
   return (
     <Root>
       <Router history={history}>

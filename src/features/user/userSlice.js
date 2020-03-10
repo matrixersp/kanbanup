@@ -77,7 +77,11 @@ export const signUp = data => dispatch => {
       );
       history.push(`/boards`);
     })
-    .catch(err => dispatch(signUpError(err)));
+    .catch(err => {
+      const error =
+        err.response.data.error || err.response.data.errors[0].error;
+      dispatch(signInError(error));
+    });
 };
 
 export const signin = data => dispatch => {
@@ -99,6 +103,11 @@ export const signin = data => dispatch => {
         const boardId = user.currentBoard;
         history.push(`/boards/${boardId}`);
       }
+    })
+    .catch(err => {
+      const error =
+        err.response.data.error || err.response.data.errors[0].error;
+      dispatch(signInError(error));
     });
 };
 
