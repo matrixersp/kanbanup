@@ -20,18 +20,20 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react", "prettier"
+        "react",
+        "prettier"
     ],
     "rules": {
-			"prettier/prettier": [
-				"error",
-				{
-					"singleQuote": true,
-					"semi": true,
-					"tabWidth": 2,
-					"printWidth": 80
-				}
-			],
-			"no-underscore-dangle": "off"
+        "prettier/prettier": [
+            "error",
+            {
+                "singleQuote": true,
+                "semi": true,
+                "tabWidth": 2,
+                "printWidth": 80
+            }
+        ],
+        "no-underscore-dangle": "off",
+        "global-require": "off"
     }
 }

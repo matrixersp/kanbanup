@@ -1,8 +1,7 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import {
-  TextInput,
   Button,
   PrimaryButton,
   Form,
@@ -11,6 +10,7 @@ import {
 } from 'components/styled';
 import styled from 'styled-components';
 import { signin } from 'features/user/userSlice';
+import { validateEmail, validatePassword } from 'helpers/validators';
 
 const Container = styled(Form)``;
 
@@ -31,20 +31,57 @@ const SignupLink = styled(Button)`
   color: #00aecc;
 `;
 
+const ErrorMessage = styled.div`
+  background-color: #ffd1d1;
+  margin-bottom: 0.5rem;
+  width: 18rem;
+  text-align: justify;
+  border-radius: 0.25rem;
+  padding: 0.2rem 0.25rem;
+  font-size: 0.8rem;
+`;
+
 export default function Register() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
 
   const handleLogin = data => {
     dispatch(signin(data));
   };
 
+  const loginError = useSelector(state => state.user.error);
+
   return (
     <Container onSubmit={handleSubmit(handleLogin)}>
       <Title>Sign in to continue</Title>
-      <EmailInput name="email" placeholder="Email" ref={register} />
-      <PasswordInput name="password" placeholder="Password" ref={register} />
-      <JoinButton as="input" type="submit" value="Sign In" />
+      <ErrorMessage
+        data-testid="error-message-email"
+        style={{ display: !loginError && !errors.email && 'none' }}
+      >
+        {loginError || validateEmail(errors.email)}
+      </ErrorMessage>
+      <EmailInput
+        name="email"
+        placeholder="Email"
+        ref={register({ required: true })}
+      />
+      <ErrorMessage
+        data-testid="error-message-password"
+        style={{ display: !errors.password && 'none' }}
+      >
+        {validatePassword(errors.password)}
+      </ErrorMessage>
+      <PasswordInput
+        name="password"
+        placeholder="Password"
+        ref={register({ required: true })}
+      />
+      <JoinButton
+        data-testid="button-join"
+        as="input"
+        type="submit"
+        value="Sign In"
+      />
       <div
         style={{
           color: '#36475b',
