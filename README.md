@@ -13,8 +13,7 @@ npm install
 npm start
 ```
 
-*__NOTE__: for now the [backend server](https://github.com/matrixersp/kanbello-api) needs to be running, in addition you need MongoDB to be installed locally and also you need to manually create a board and replace the id in `src/app/appSlice.js`.
-This will change soon.*
+*__NOTE__: for now the [backend server](https://github.com/matrixersp/kanbello-api) needs to be running, in addition you need MongoDB to be installed locally.*
 
 ## Contribution
 
