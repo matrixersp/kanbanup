@@ -1,9 +1,9 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import { Button, TranslucentButton } from 'components/styled';
-import { useHistory } from 'react-router-dom';
 import { logout } from 'app/appSlice';
+import { Button, TranslucentButton } from 'components/styled';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Container = styled.header`
   display: flex;
@@ -68,7 +68,7 @@ export default function Header() {
     <Container>
       <Brand href="/">
         <h2>K</h2>
-        <span style={{ marginTop: '-.125rem' }}>anbello</span>
+        <span style={{ marginTop: '-.125rem' }}>anbanup</span>
       </Brand>
       {token ? (
         <LogoutButton onClick={handleLogout}>Logout</LogoutButton>

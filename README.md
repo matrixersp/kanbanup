@@ -1,4 +1,4 @@
-# Kanbello
+# KanbanUp
 
 A Trello-like Kanban Board App.
 
@@ -7,13 +7,13 @@ A Trello-like Kanban Board App.
 ## Quick Start
 
 ```sh
-git clone git@github.com:matrixersp/kanbello.git
-cd kanbello
+git clone git@github.com:matrixersp/kanbanup.git
+cd kanbanup
 npm install
 npm start
 ```
 
-*__NOTE__: for now the [backend server](https://github.com/matrixersp/kanbello-api) needs to be running, in addition you need MongoDB to be installed locally.*
+*__NOTE__: for now the [backend server](https://github.com/matrixersp/kanbanup-api) needs to be running, in addition you need MongoDB to be installed locally.*
 
 ## Contribution
 
@@ -21,4 +21,4 @@ Contributions are welcome and greatly appreciated, via issues and/or pull reques
 
 ## License
 
-Licensed under the [MIT license](https://github.com/matrixersp/kanbello/blob/master/LICENSE). 
+Licensed under the [MIT license](https://github.com/matrixersp/kanbanup/blob/master/LICENSE). 

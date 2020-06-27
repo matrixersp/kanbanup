@@ -1,13 +1,13 @@
-import React from 'react';
-import App from './App';
 import { renderWithRedux } from 'helpers/redux';
 import 'mutationobserver-shim';
+import React from 'react';
+import App from './App';
 
 describe('<App/>', () => {
   it('should render correctly with redux with defaults', () => {
     const { getByTestId, getByRole } = renderWithRedux(<App />);
 
-    expect(getByRole('link', { name: /K\s?anbello/ })).toBeInTheDocument();
+    expect(getByRole('link', { name: /K\s?anbanup/ })).toBeInTheDocument();
     expect(getByTestId('hero-title')).toHaveTextContent(
       'Boost your Personal and Team Productivity'
     );
