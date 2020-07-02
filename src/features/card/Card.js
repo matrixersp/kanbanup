@@ -1,14 +1,12 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Draggable } from 'react-beautiful-dnd';
-
-import { IconWrapper } from 'components/styled';
-import { EditIcon } from 'components/Icons.js';
-
 import { toggleCardActions } from 'app/appSlice';
+import { EditIcon } from 'components/Icons.js';
+import { IconWrapper } from 'components/styled';
 import { getScrollOffsetTop } from 'helpers/dom';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Draggable } from 'react-beautiful-dnd';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
 const Container = styled.div`
   position: relative;
@@ -35,6 +33,8 @@ const Container = styled.div`
 const Title = styled.span`
   vertical-align: middle;
   line-height: 1.4;
+  word-break: break-all;
+  white-space: break-spaces;
 `;
 
 const EditCard = styled(IconWrapper)`
@@ -56,7 +56,7 @@ export default function Card({ card, index }) {
   const dispatch = useDispatch();
   const cardRef = React.createRef();
 
-  const handleToggleCardActions = e => {
+  const handleToggleCardActions = (e) => {
     const cardPopupHeight = 128;
     const offsetTop = getScrollOffsetTop(e.target, cardPopupHeight) + 'px';
     const offsetLeft = cardRef.current.offsetLeft + 'px';
@@ -65,7 +65,7 @@ export default function Card({ card, index }) {
 
   return (
     <Draggable draggableId={card._id} index={index}>
-      {provided => (
+      {(provided) => (
         <div
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -78,7 +78,7 @@ export default function Card({ card, index }) {
                 style={{
                   background: 'none',
                   fontSize: '0.5rem',
-                  width: '1.2rem'
+                  width: '1.2rem',
                 }}
               />
             </EditCard>
@@ -91,5 +91,5 @@ export default function Card({ card, index }) {
 
 Card.propTypes = {
   card: PropTypes.object,
-  index: PropTypes.number
+  index: PropTypes.number,
 };
