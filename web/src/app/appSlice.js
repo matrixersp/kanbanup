@@ -9,7 +9,7 @@ const app = createSlice({
     isAddList: false,
     listActions: {},
     cardActions: {},
-    listToAddCard: ''
+    listToAddCard: '',
   },
   reducers: {
     toggleAddBoard(state) {
@@ -33,7 +33,7 @@ const app = createSlice({
     },
     logout() {
       return;
-    }
+    },
   },
   extraReducers: {
     addList(state) {
@@ -47,8 +47,8 @@ const app = createSlice({
     },
     [cardTitleSaved](state) {
       state.cardActions = {};
-    }
-  }
+    },
+  },
 });
 
 export const {
@@ -59,7 +59,7 @@ export const {
   toggleCardActions,
   changeCardTitle,
   closePopups,
-  logout
+  logout,
 } = app.actions;
 
 export default app.reducer;

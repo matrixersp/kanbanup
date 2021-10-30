@@ -19,5 +19,5 @@ export const theme = {
   primaryBorderRadius: '10rem',
   secondaryBorderRadius: '.25rem',
   // Buttons
-  translucentButtonBgColor: 'rgba(255, 255, 255, 0.36)'
+  translucentButtonBgColor: 'rgba(255, 255, 255, 0.36)',
 };

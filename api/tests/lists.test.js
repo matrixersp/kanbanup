@@ -16,7 +16,7 @@ describe('/api/lists', () => {
   const user = new User({
     name: 'User Name',
     email: 'email@domain.com',
-    password: hash
+    password: hash,
   });
   let token;
 
@@ -29,7 +29,7 @@ describe('/api/lists', () => {
       title: 'Board 1',
       owner: user._id,
       participants: user._id,
-      lists: [{ _id: listId, title: 'First list' }]
+      lists: [{ _id: listId, title: 'First list' }],
     });
   });
 

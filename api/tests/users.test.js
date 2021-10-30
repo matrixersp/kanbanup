@@ -11,7 +11,7 @@ describe('/api/users', () => {
   const testUser = new User({
     name: 'User Name',
     email: 'email@domain.com',
-    password: hash
+    password: hash,
   });
 
   beforeEach(async () => {
@@ -63,12 +63,10 @@ describe('/api/users', () => {
         name: 'User Name',
         email: 'email@domain.com',
         password: '123456',
-        repeatPassword: '123456'
+        repeatPassword: '123456',
       };
 
-      const res = await request(server)
-        .post('/api/users')
-        .send(user);
+      const res = await request(server).post('/api/users').send(user);
 
       expect(res.status).toBe(201);
       expect(res.body._id).toBeDefined();
@@ -81,12 +79,10 @@ describe('/api/users', () => {
       const user = {
         name: 'User Name',
         email: 'email@domain.com',
-        password: '123456'
+        password: '123456',
       };
 
-      const res = await request(server)
-        .post('/api/users')
-        .send(user);
+      const res = await request(server).post('/api/users').send(user);
 
       expect(res.status).toBe(400);
       expect(res.body.errors).toBeDefined();
@@ -97,14 +93,12 @@ describe('/api/users', () => {
         name: 'User Name',
         email: 'email@domain.com',
         password: '123456',
-        repeatPassword: '123456'
+        repeatPassword: '123456',
       };
 
       await User.create(user);
 
-      const res = await request(server)
-        .post('/api/users')
-        .send(user);
+      const res = await request(server).post('/api/users').send(user);
 
       expect(res.status).toBe(400);
       expect(res.body.error).toBe('User already registered.');

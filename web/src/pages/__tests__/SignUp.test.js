@@ -1,9 +1,8 @@
-import React from 'react';
 import { fireEvent } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import { renderWithRedux } from 'helpers/redux';
 import SignUp from 'pages/SignUp';
 import 'mutationobserver-shim';
-import { act } from 'react-dom/test-utils';
 
 describe('<SignUp/>', () => {
   it('should render correctly', () => {
@@ -18,7 +17,7 @@ describe('<SignUp/>', () => {
     const { getByTestId, getByPlaceholderText } = renderWithRedux(<SignUp />);
 
     fireEvent.change(getByPlaceholderText('Full name'), {
-      target: { value: 'Name' }
+      target: { value: 'Name' },
     });
 
     await act(async () => {
@@ -44,7 +43,7 @@ describe('<SignUp/>', () => {
     );
 
     fireEvent.change(getByPlaceholderText('Full name'), {
-      target: { value: 'Name 98' }
+      target: { value: 'Name 98' },
     });
 
     await act(async () => {
@@ -60,7 +59,7 @@ describe('<SignUp/>', () => {
     const { getByTestId, getByPlaceholderText } = renderWithRedux(<SignUp />);
 
     fireEvent.change(getByPlaceholderText('Email'), {
-      target: { value: 'test@email.com' }
+      target: { value: 'test@email.com' },
     });
     await act(async () => {
       fireEvent.click(getByTestId('button-signup'));
@@ -85,7 +84,7 @@ describe('<SignUp/>', () => {
     );
 
     fireEvent.change(getByPlaceholderText('Email'), {
-      target: { value: 'test@email' }
+      target: { value: 'test@email' },
     });
     await act(async () => {
       fireEvent.click(getByTestId('button-signup'));
@@ -98,7 +97,7 @@ describe('<SignUp/>', () => {
     const { getByTestId, getByPlaceholderText } = renderWithRedux(<SignUp />);
 
     fireEvent.change(getByPlaceholderText('Password'), {
-      target: { value: 'password' }
+      target: { value: 'password' },
     });
 
     await act(async () => {
@@ -122,7 +121,7 @@ describe('<SignUp/>', () => {
     const { getByTestId, getByPlaceholderText } = renderWithRedux(<SignUp />);
 
     fireEvent.change(getByPlaceholderText('Password'), {
-      target: { value: 'pass' }
+      target: { value: 'pass' },
     });
     await act(async () => {
       fireEvent.click(getByTestId('button-signup'));
@@ -135,16 +134,16 @@ describe('<SignUp/>', () => {
     const { getByTestId, getByPlaceholderText } = renderWithRedux(<SignUp />);
 
     fireEvent.change(getByPlaceholderText('Full name'), {
-      target: { value: 'Test Name' }
+      target: { value: 'Test Name' },
     });
 
     const timestamp = Date.now();
     fireEvent.change(getByPlaceholderText('Email'), {
-      target: { value: `test${timestamp}@email.com` }
+      target: { value: `test${timestamp}@email.com` },
     });
 
     fireEvent.change(getByPlaceholderText('Password'), {
-      target: { value: 'password' }
+      target: { value: 'password' },
     });
 
     await act(async () => {

@@ -17,7 +17,7 @@ router.get('/', auth, async (req, res) => {
 router.get('/:id', auth, validateObjectId, async (req, res) => {
   const board = await Board.findOne({
     _id: req.params.id,
-    participants: req.user._id
+    participants: req.user._id,
   })
     .populate('lists.cards')
     .select('-__v');
@@ -34,7 +34,7 @@ router.post('/', auth, async (req, res) => {
   const { error } = validateBoard(req.body);
   if (error) {
     const errors = [];
-    error.details.forEach(d => errors.push({ error: d.message }));
+    error.details.forEach((d) => errors.push({ error: d.message }));
     return res.status(400).json({ errors });
   }
 
@@ -53,7 +53,7 @@ router.post('/', auth, async (req, res) => {
     _id: boardId,
     title: req.body.title,
     owner: req.user._id,
-    participants: req.user._id
+    participants: req.user._id,
   });
 
   await user.save();
@@ -66,14 +66,14 @@ router.patch('/:id', auth, validateObjectId, async (req, res) => {
   const { error } = validateBoard(req.body);
   if (error) {
     const errors = [];
-    error.details.forEach(d => errors.push({ error: d.message }));
+    error.details.forEach((d) => errors.push({ error: d.message }));
     return res.status(400).json({ errors });
   }
 
   const board = await Board.findOneAndUpdate(
     {
       _id: req.params.id,
-      participants: req.user._id
+      participants: req.user._id,
     },
     { title: req.body.title },
     { new: true }
@@ -89,7 +89,7 @@ router.patch('/:id', auth, validateObjectId, async (req, res) => {
 router.delete('/:id', auth, validateObjectId, async (req, res) => {
   const board = await Board.findOneAndRemove({
     _id: req.params.id,
-    owner: req.user._id
+    owner: req.user._id,
   });
   if (!board)
     return res

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -56,9 +55,9 @@ const EditList = styled(IconWrapper)`
 
 export default function List({ list }) {
   const dispatch = useDispatch();
-  const boardId = useSelector(state => state.board._id);
+  const boardId = useSelector((state) => state.board._id);
 
-  const handleToggleListActions = e => {
+  const handleToggleListActions = (e) => {
     e.stopPropagation();
 
     const listActionsWidth = 248;
@@ -70,11 +69,11 @@ export default function List({ list }) {
     );
   };
 
-  const handleTitleChange = e => {
+  const handleTitleChange = (e) => {
     dispatch(listTitleChanged({ id: list._id, title: e.target.value }));
   };
 
-  const handleSaveListTitle = e => {
+  const handleSaveListTitle = (e) => {
     if ((e.keyCode === 13 || e.type === 'blur') && e.target.value.trim()) {
       saveListTitle(list._id, boardId, e.target.value);
       e.target.blur();
@@ -101,5 +100,5 @@ export default function List({ list }) {
 }
 
 List.propTypes = {
-  list: PropTypes.object
+  list: PropTypes.object,
 };

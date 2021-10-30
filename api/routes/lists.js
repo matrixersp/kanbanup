@@ -11,14 +11,14 @@ router.post('/', [auth, validateBoardId], async (req, res) => {
   const { error } = validateList(req.body);
   if (error) {
     const errors = [];
-    error.details.forEach(d => errors.push({ error: d.message }));
+    error.details.forEach((d) => errors.push({ error: d.message }));
     return res.status(400).json({ errors });
   }
 
   const list = new List({ title: req.body.title });
   const query = {
     _id: req.body.boardId,
-    participants: req.user._id
+    participants: req.user._id,
   };
   const update = { $push: { lists: list } };
   const options = { new: true };
@@ -40,13 +40,13 @@ router.patch(
     const { error } = validateList(req.body);
     if (error) {
       const errors = [];
-      error.details.forEach(d => errors.push({ error: d.message }));
+      error.details.forEach((d) => errors.push({ error: d.message }));
       return res.status(400).json({ errors });
     }
 
     const board = await Board.findOne({
       _id: req.body.boardId,
-      'lists._id': req.params.id
+      'lists._id': req.params.id,
     });
     if (!board)
       return res
@@ -54,7 +54,7 @@ router.patch(
         .json({ error: 'The list with the given ID was not found.' });
 
     const index = board.lists.findIndex(
-      l => req.params.id === l._id.toString()
+      (l) => req.params.id === l._id.toString()
     );
     if (index === -1)
       return res
@@ -76,7 +76,7 @@ router.delete(
   async (req, res) => {
     const board = await Board.findOne({
       _id: req.body.boardId,
-      participants: req.user._id
+      participants: req.user._id,
     });
     if (!board)
       return res
@@ -84,7 +84,7 @@ router.delete(
         .json({ error: 'The board with the given ID was not found.' });
 
     const index = board.lists.findIndex(
-      l => req.params.id === l._id.toString()
+      (l) => req.params.id === l._id.toString()
     );
     if (index === -1)
       return res

@@ -1,14 +1,13 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import styled from 'styled-components';
 import {
   Button,
-  PrimaryButton,
   Form,
+  FormInput,
   FormTitle,
-  FormInput
+  PrimaryButton,
 } from 'components/styled';
-import styled from 'styled-components';
 import { signin } from 'features/user/userSlice';
 import { validateEmail, validatePassword } from 'helpers/validators';
 
@@ -17,11 +16,11 @@ const Container = styled(Form)``;
 const Title = styled(FormTitle)``;
 
 const EmailInput = styled(FormInput).attrs(() => ({
-  type: 'email'
+  type: 'email',
 }))``;
 
 const PasswordInput = styled(FormInput).attrs(() => ({
-  type: 'password'
+  type: 'password',
 }))``;
 
 const JoinButton = styled(PrimaryButton)``;
@@ -42,14 +41,18 @@ const ErrorMessage = styled.div`
 `;
 
 export default function Register() {
-  const { register, handleSubmit, errors } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const dispatch = useDispatch();
 
-  const handleLogin = data => {
+  const handleLogin = (data) => {
     dispatch(signin(data));
   };
 
-  const loginError = useSelector(state => state.user.error);
+  const loginError = useSelector((state) => state.user.error);
 
   return (
     <Container onSubmit={handleSubmit(handleLogin)}>
@@ -61,9 +64,8 @@ export default function Register() {
         {loginError || validateEmail(errors.email)}
       </ErrorMessage>
       <EmailInput
-        name="email"
         placeholder="Email"
-        ref={register({ required: true })}
+        {...register('email', { required: true })}
       />
       <ErrorMessage
         data-testid="error-message-password"
@@ -72,9 +74,8 @@ export default function Register() {
         {validatePassword(errors.password)}
       </ErrorMessage>
       <PasswordInput
-        name="password"
         placeholder="Password"
-        ref={register({ required: true })}
+        {...register('password', { required: true })}
       />
       <JoinButton
         data-testid="button-join"
@@ -86,7 +87,7 @@ export default function Register() {
         style={{
           color: '#36475b',
           fontSize: '.8rem',
-          marginBottom: '.8rem'
+          marginBottom: '.8rem',
         }}
       >
         Not a member? <SignupLink href="/signup">Sign Up</SignupLink>

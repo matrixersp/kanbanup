@@ -62,7 +62,7 @@ const TertiaryButton = styled(Button)`
 `;
 
 const TextInput = styled.input.attrs(() => ({
-  type: 'text'
+  type: 'text',
 }))`
   background-color: inherit;
   color: ${({ theme }) => theme.primaryTextColor || '#36475b'};
@@ -155,5 +155,5 @@ export {
   IconWrapper,
   Form,
   FormTitle,
-  FormInput
+  FormInput,
 };

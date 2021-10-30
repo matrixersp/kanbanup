@@ -3,7 +3,7 @@ export function normalizeLists(lists) {
   const listsById = lists.reduce((acc, cur) => {
     const { cards, ...list } = cur;
 
-    const cardIds = cards.map(c => c._id);
+    const cardIds = cards.map((c) => c._id);
     list.cards = cardIds;
 
     listIds.push(list._id);

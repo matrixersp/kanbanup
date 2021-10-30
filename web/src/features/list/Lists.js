@@ -1,5 +1,4 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { DragDropContext } from 'react-beautiful-dnd';
 
@@ -32,13 +31,13 @@ const AddListButton = styled(TertiaryButton)`
 export default function Lists() {
   const dispatch = useDispatch();
 
-  const lists = useSelector(state =>
-    state.lists.ids.map(id => state.lists.byId[id])
+  const lists = useSelector((state) =>
+    state.lists.ids.map((id) => state.lists.byId[id])
   );
 
-  const isAddList = useSelector(state => state.app.isAddList);
+  const isAddList = useSelector((state) => state.app.isAddList);
 
-  const handleDragEnd = result => {
+  const handleDragEnd = (result) => {
     const { draggableId, source, destination } = result;
 
     if (!destination) return;
@@ -54,7 +53,7 @@ export default function Lists() {
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <ListsWrapper>
-        {lists.map(list => (
+        {lists.map((list) => (
           <List key={list._id} list={list} />
         ))}
         {isAddList ? (

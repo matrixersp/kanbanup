@@ -1,12 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { IconWrapper } from 'components/styled';
 import { CancelIcon } from 'components/Icons';
 
 const OverlayStyled = styled.div`
-  visibility: ${props => (props.isVisible ? 'visible' : 'hidden')};
+  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
   position: fixed;
   top: 0;
   left: 0;
@@ -17,7 +15,7 @@ const OverlayStyled = styled.div`
 `;
 
 export default function Overlay({ children }) {
-  const isVisible = useSelector(state => state.app.hasOverlay);
+  const isVisible = useSelector((state) => state.app.hasOverlay);
 
   const dispatch = useDispatch();
 

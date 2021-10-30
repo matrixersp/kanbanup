@@ -1,12 +1,12 @@
-import { toggleCardActions } from 'app/appSlice';
-import { EditIcon } from 'components/Icons.js';
-import { IconWrapper } from 'components/styled';
-import { getScrollOffsetTop } from 'helpers/dom';
 import PropTypes from 'prop-types';
-import React from 'react';
+import { createRef } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { getScrollOffsetTop } from 'helpers/dom';
+import { IconWrapper } from 'components/styled';
+import { EditIcon } from 'components/Icons.js';
+import { toggleCardActions } from 'app/appSlice';
 
 const Container = styled.div`
   position: relative;
@@ -54,7 +54,7 @@ const EditCard = styled(IconWrapper)`
 
 export default function Card({ card, index }) {
   const dispatch = useDispatch();
-  const cardRef = React.createRef();
+  const cardRef = createRef();
 
   const handleToggleCardActions = (e) => {
     const cardPopupHeight = 128;

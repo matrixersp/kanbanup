@@ -13,15 +13,15 @@ const preloadedState = {
     isLoading: false,
     error: null,
     token: localStorage.getItem('TOKEN'),
-    currentBoard: localStorage.getItem('CURRENT_BOARD')
-  }
+    currentBoard: localStorage.getItem('CURRENT_BOARD'),
+  },
 };
 
 const store = configureStore({
   preloadedState,
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production',
-  middleware
+  middleware,
 });
 
 store.subscribe(() => {

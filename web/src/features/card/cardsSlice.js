@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { combineReducers } from 'redux';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchSuccess, fetchBoardSuccess } from 'features/board/boardSlice';
+import { fetchBoardSuccess, fetchSuccess } from 'features/board/boardSlice';
 import { BASE_URL } from 'helpers/constants';
 
 const cardsById = createSlice({
@@ -16,7 +16,7 @@ const cardsById = createSlice({
     },
     cardDeleted(state, { payload }) {
       delete state[payload._id];
-    }
+    },
   },
   extraReducers: {
     [fetchBoardSuccess](state, { payload }) {
@@ -24,8 +24,8 @@ const cardsById = createSlice({
     },
     [fetchSuccess](state, { payload }) {
       return payload.cards.byId;
-    }
-  }
+    },
+  },
 });
 
 export const { cardDeleted, cardAdded, cardTitleSaved } = cardsById.actions;
@@ -45,34 +45,34 @@ const cardIds = createSlice({
       state.push(payload._id);
     },
     [cardDeleted](state, { payload }) {
-      const index = state.findIndex(id => id === payload.id);
+      const index = state.findIndex((id) => id === payload.id);
       state.splice(index, 1);
-    }
-  }
+    },
+  },
 });
 
-export const saveCardTitle = (id, title) => dispatch => {
-  axios.patch(`${BASE_URL}/cards/${id}`, { title }).then((res, err) => {
+export const saveCardTitle = (id, title) => (dispatch) => {
+  axios.patch(`${BASE_URL}/cards/${id}`, { title }).then((res) => {
     dispatch(cardTitleSaved({ id, title: res.data.title }));
   });
 };
 
-export const addCard = (listId, boardId, title) => dispatch => {
-  axios.post(`${BASE_URL}/cards`, { listId, boardId, title }).then(res => {
+export const addCard = (listId, boardId, title) => (dispatch) => {
+  axios.post(`${BASE_URL}/cards`, { listId, boardId, title }).then((res) => {
     dispatch(cardAdded(res.data));
   });
 };
 
-export const deleteCard = (id, listId, boardId) => dispatch => {
+export const deleteCard = (id, listId, boardId) => (dispatch) => {
   axios
     .delete(`${BASE_URL}/cards/${id}`, { data: { listId, boardId } })
     .then(() => {
       dispatch(cardDeleted({ id, listId }));
     })
-    .catch(err => console.log(err.reponse));
+    .catch((err) => console.log(err.reponse));
 };
 
 export default combineReducers({
   byId: cardsById.reducer,
-  ids: cardIds.reducer
+  ids: cardIds.reducer,
 });

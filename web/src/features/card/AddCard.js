@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { CancelIcon } from 'components/Icons';
-import { TextArea, SecondaryButton, IconWrapper } from 'components/styled';
+import { IconWrapper, SecondaryButton, TextArea } from 'components/styled';
 import { toggleAddCard } from 'app/appSlice';
 import { addCard } from 'features/card/cardsSlice';
 
@@ -24,8 +24,8 @@ const AddCardButton = styled(SecondaryButton)`
 `;
 
 function NewCard() {
-  const boardId = useSelector(state => state.board._id);
-  const listId = useSelector(state => state.app.listToAddCard);
+  const boardId = useSelector((state) => state.board._id);
+  const listId = useSelector((state) => state.app.listToAddCard);
   const dispatch = useDispatch();
   const inputRef = useRef();
 
@@ -35,7 +35,7 @@ function NewCard() {
 
   let [title, setTitle] = useState('');
 
-  const handleAddCard = e => {
+  const handleAddCard = (e) => {
     if (
       (e.type === 'click' || (e.keyCode === 13 && e.ctrlKey)) &&
       title.trim()
@@ -63,7 +63,7 @@ function NewCard() {
       <CardTextArea
         ref={inputRef}
         value={title}
-        onChange={e => setTitle(e.target.value)}
+        onChange={(e) => setTitle(e.target.value)}
         onKeyDown={handleAddCard}
       />
       <div style={{ display: 'flex', alignItems: 'center' }}>

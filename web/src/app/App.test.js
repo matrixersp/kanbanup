@@ -1,7 +1,6 @@
 import { renderWithRedux } from 'helpers/redux';
 import 'mutationobserver-shim';
-import React from 'react';
-import App from './App';
+import App from 'app/App';
 
 describe('<App/>', () => {
   it('should render correctly with redux with defaults', () => {

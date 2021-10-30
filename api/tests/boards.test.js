@@ -13,7 +13,7 @@ describe('/api/boards', () => {
   const user = new User({
     name: 'User Name',
     email: 'email@domain.com',
-    password: hash
+    password: hash,
   });
 
   let token;
@@ -33,7 +33,7 @@ describe('/api/boards', () => {
   describe('GET /', () => {
     Board.insertMany([
       { title: 'Board 1', owner: user._id, participants: user._id },
-      { title: 'Board 2', owner: user._id, participants: user._id }
+      { title: 'Board 2', owner: user._id, participants: user._id },
     ]);
 
     it('should return all boards', async () => {
@@ -43,8 +43,8 @@ describe('/api/boards', () => {
 
       expect(res.status).toBe(200);
       expect(Array.isArray(res.body)).toBeTruthy();
-      expect(res.body.some(b => b.title === 'Board 1')).toBeTruthy();
-      expect(res.body.some(b => b.title === 'Board 2')).toBeTruthy();
+      expect(res.body.some((b) => b.title === 'Board 1')).toBeTruthy();
+      expect(res.body.some((b) => b.title === 'Board 2')).toBeTruthy();
     });
   });
 
@@ -53,7 +53,7 @@ describe('/api/boards', () => {
       const board = new Board({
         title: 'Board 1',
         owner: user._id,
-        participants: user._id
+        participants: user._id,
       });
       await board.save();
 
@@ -113,7 +113,7 @@ describe('/api/boards', () => {
       const board = new Board({
         title: 'Board 1',
         owner: user._id,
-        participants: user._id
+        participants: user._id,
       });
       await board.save();
 

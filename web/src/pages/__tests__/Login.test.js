@@ -1,9 +1,8 @@
-import React from 'react';
 import { fireEvent } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import { renderWithRedux } from 'helpers/redux';
 import Login from 'pages/Login';
 import 'mutationobserver-shim';
-import { act } from 'react-dom/test-utils';
 
 describe('<Login/>', () => {
   it('should render correctly', () => {
@@ -17,11 +16,11 @@ describe('<Login/>', () => {
     const { getByTestId, getByPlaceholderText } = renderWithRedux(<Login />);
 
     fireEvent.change(getByPlaceholderText('Email'), {
-      target: { value: 'test@email.com' }
+      target: { value: 'test@email.com' },
     });
 
     fireEvent.change(getByPlaceholderText('Password'), {
-      target: { value: 'password' }
+      target: { value: 'password' },
     });
 
     await act(async () => {
@@ -45,7 +44,7 @@ describe('<Login/>', () => {
     const { getByTestId, getByPlaceholderText } = renderWithRedux(<Login />);
 
     fireEvent.change(getByPlaceholderText('Password'), {
-      target: { value: 'password' }
+      target: { value: 'password' },
     });
 
     await act(async () => {
@@ -69,11 +68,11 @@ describe('<Login/>', () => {
     const { getByTestId, getByPlaceholderText } = renderWithRedux(<Login />);
 
     fireEvent.change(getByPlaceholderText('Email'), {
-      target: { value: `test@email.com` }
+      target: { value: `test@email.com` },
     });
 
     fireEvent.change(getByPlaceholderText('Password'), {
-      target: { value: 'password' }
+      target: { value: 'password' },
     });
 
     await act(async () => {

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { combineReducers } from 'redux';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchSuccess, fetchBoardSuccess } from 'features/board/boardSlice';
+import { fetchBoardSuccess, fetchSuccess } from 'features/board/boardSlice';
 import { cardAdded, cardDeleted } from 'features/card/cardsSlice';
 import { BASE_URL } from 'helpers/constants';
 
@@ -27,7 +27,7 @@ const listsById = createSlice({
         0,
         draggableId
       );
-    }
+    },
   },
   extraReducers: {
     [fetchBoardSuccess](state, { payload }) {
@@ -38,19 +38,15 @@ const listsById = createSlice({
     },
     [cardDeleted](state, { payload }) {
       const index = state[payload.listId].cards.findIndex(
-        id => id === payload.id
+        (id) => id === payload.id
       );
       state[payload.listId].cards.splice(index, 1);
-    }
-  }
+    },
+  },
 });
 
-export const {
-  listTitleChanged,
-  listAdded,
-  listDeleted,
-  cardMoved
-} = listsById.actions;
+export const { listTitleChanged, listAdded, listDeleted, cardMoved } =
+  listsById.actions;
 
 const listIds = createSlice({
   name: 'listIds',
@@ -67,38 +63,38 @@ const listIds = createSlice({
       state.push(payload._id);
     },
     [listDeleted](state, { payload }) {
-      const index = state.findIndex(id => id === payload);
+      const index = state.findIndex((id) => id === payload);
       state.splice(index, 1);
-    }
-  }
+    },
+  },
 });
 
 export const saveListTitle = (id, boardId, title) =>
   axios.patch(`${BASE_URL}/lists/${id}`, { boardId, title });
 
-export const addList = (boardId, title) => dispatch => {
+export const addList = (boardId, title) => (dispatch) => {
   axios
     .post(`${BASE_URL}/lists`, { boardId, title })
-    .then(res => dispatch(listAdded(res.data)));
+    .then((res) => dispatch(listAdded(res.data)));
 };
 
-export const deleteList = (id, boardId) => dispatch => {
+export const deleteList = (id, boardId) => (dispatch) => {
   axios
     .delete(`${BASE_URL}/lists/${id}`, { data: { boardId } })
     .then(() => dispatch(listDeleted(id)))
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
-export const moveCard = (draggableId, source, destination) => dispatch => {
+export const moveCard = (draggableId, source, destination) => (dispatch) => {
   console.log(draggableId, source, destination);
   dispatch(cardMoved({ draggableId, source, destination }));
   axios.patch(`${BASE_URL}/cards/${draggableId}`, {
     source: { listId: source.droppableId, index: source.index },
-    destination: { listId: destination.droppableId, index: destination.index }
+    destination: { listId: destination.droppableId, index: destination.index },
   });
 };
 
 export default combineReducers({
   byId: listsById.reducer,
-  ids: listIds.reducer
+  ids: listIds.reducer,
 });

@@ -1,9 +1,8 @@
-import { logout } from 'app/appSlice';
-import { Button, TranslucentButton } from 'components/styled';
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { Button, TranslucentButton } from 'components/styled';
+import { logout } from 'app/appSlice';
 
 const Container = styled.header`
   display: flex;
@@ -54,7 +53,7 @@ const LogoutButton = styled(Button)`
 `;
 
 export default function Header() {
-  const token = useSelector(state => state.user.token);
+  const token = useSelector((state) => state.user.token);
   const history = useHistory();
 
   const dispatch = useDispatch();

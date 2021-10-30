@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { changeBoardTitle, saveBoardTitle } from 'features/board/boardSlice';
@@ -34,7 +34,7 @@ const Span = styled.span`
 export default function BoardHeader() {
   const input = useRef();
   const span = useRef();
-  const { _id, title } = useSelector(state => state.board);
+  const { _id, title } = useSelector((state) => state.board);
 
   const dispatch = useDispatch();
 
@@ -42,11 +42,11 @@ export default function BoardHeader() {
     input.current.style.width = span.current.offsetWidth + 'px';
   });
 
-  const handleChangeBoardTitle = e => {
+  const handleChangeBoardTitle = (e) => {
     dispatch(changeBoardTitle(e.target.value));
   };
 
-  const handleSaveBordTitle = e => {
+  const handleSaveBordTitle = (e) => {
     if ((e.keyCode === 13 || e.type === 'blur') && e.target.value.trim()) {
       dispatch(saveBoardTitle(_id, e.target.value));
       e.target.blur();

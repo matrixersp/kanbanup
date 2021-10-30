@@ -18,7 +18,7 @@ describe('/api/cards', () => {
   const user = new User({
     name: 'User Name',
     email: 'email@domain.com',
-    password: hash
+    password: hash,
   });
 
   const testBoard = new Board({
@@ -26,10 +26,10 @@ describe('/api/cards', () => {
     title: 'Board 1',
     lists: [
       { _id: listId1, title: 'First list' },
-      { _id: listId2, title: 'Second List' }
+      { _id: listId2, title: 'Second List' },
     ],
     owner: user._id,
-    participants: user._id
+    participants: user._id,
   });
 
   let token;
@@ -192,7 +192,7 @@ describe('/api/cards', () => {
         .set('authorization', `Bearer ${token}`)
         .send({
           source: { listId: listId1, index: 0 },
-          destination: { listId: listId2, index: 0 }
+          destination: { listId: listId2, index: 0 },
         });
 
       expect(res.status).toBe(200);
@@ -202,18 +202,18 @@ describe('/api/cards', () => {
       const board = await Board.findById(boardId);
 
       const sourceList = board.lists.find(
-        l => l._id.toString() === listId1.toString()
+        (l) => l._id.toString() === listId1.toString()
       );
       const destinationList = board.lists.find(
-        l => l._id.toString() === listId2.toString()
+        (l) => l._id.toString() === listId2.toString()
       );
 
       expect(
-        sourceList.cards.some(c => c._id.toString() === card._id.toString())
+        sourceList.cards.some((c) => c._id.toString() === card._id.toString())
       ).toBeFalsy();
       expect(
         destinationList.cards.some(
-          c => c._id.toString() === card._id.toString()
+          (c) => c._id.toString() === card._id.toString()
         )
       ).toBeTruthy();
     });

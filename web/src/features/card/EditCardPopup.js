@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import { createRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { SecondaryButton, IconWrapper, TextArea } from 'components/styled';
-import { DeleteIcon, CancelIcon } from 'components/Icons';
-import { saveCardTitle, deleteCard } from 'features/card/cardsSlice';
+import { IconWrapper, SecondaryButton, TextArea } from 'components/styled';
+import { CancelIcon, DeleteIcon } from 'components/Icons';
+import { deleteCard, saveCardTitle } from 'features/card/cardsSlice';
 import { changeCardTitle, toggleCardActions } from 'app/appSlice';
 import { isNonEmptyObject } from 'helpers/dom';
 
 const OverlayStyled = styled.div`
-  visibility: ${props => (props.isVisible ? 'visible' : 'hidden')};
+  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
   position: fixed;
   top: 0;
   left: 0;
@@ -21,9 +21,9 @@ const OverlayStyled = styled.div`
 
 const Container = styled.div`
   position: absolute;
-  top: ${props => props.offsetTop};
-  left: ${props => props.offsetLeft};
-  visibility: ${props => (props.offsetTop ? 'visible' : 'hidden')};
+  top: ${(props) => props.offsetTop};
+  left: ${(props) => props.offsetLeft};
+  visibility: ${(props) => (props.offsetTop ? 'visible' : 'hidden')};
   width: 16rem;
 `;
 
@@ -44,21 +44,21 @@ const SaveButton = styled(SecondaryButton)`
 `;
 
 export default function EditCardPopup() {
-  const card = useSelector(state => state.app.cardActions);
+  const card = useSelector((state) => state.app.cardActions);
 
   const dispatch = useDispatch();
-  const inputRef = React.createRef();
+  const inputRef = createRef();
 
   useEffect(() => {
     inputRef.current.focus();
   });
 
-  const handleClosePopup = e => {
+  const handleClosePopup = (e) => {
     if (e.currentTarget !== e.target) return;
     e.preventDefault();
     dispatch(toggleCardActions());
   };
-  const isVisible = useSelector(state =>
+  const isVisible = useSelector((state) =>
     isNonEmptyObject(state.app.cardActions)
   );
 
@@ -76,13 +76,13 @@ export default function EditCardPopup() {
         <CardTextArea
           ref={inputRef}
           value={title || ''}
-          onChange={e => dispatch(changeCardTitle(e.target.value))}
+          onChange={(e) => dispatch(changeCardTitle(e.target.value))}
         />
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
           }}
         >
           <SaveButton onClick={() => dispatch(saveCardTitle(_id, card.title))}>
@@ -100,5 +100,5 @@ export default function EditCardPopup() {
 }
 
 EditCardPopup.propTypes = {
-  cardActions: PropTypes.object
+  cardActions: PropTypes.object,
 };

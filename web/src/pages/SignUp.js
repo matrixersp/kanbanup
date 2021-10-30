@@ -1,19 +1,18 @@
-import React from 'react';
-import {
-  Button,
-  PrimaryButton,
-  Form,
-  FormTitle,
-  FormInput
-} from 'components/styled';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import {
+  Button,
+  Form,
+  FormInput,
+  FormTitle,
+  PrimaryButton,
+} from 'components/styled';
 import { signUp } from 'features/user/userSlice';
 import {
-  validateName,
   validateEmail,
-  validatePassword
+  validateName,
+  validatePassword,
 } from 'helpers/validators';
 
 const Container = styled(Form)``;
@@ -23,11 +22,11 @@ const Title = styled(FormTitle)``;
 const NameInput = styled(FormInput)``;
 
 const EmailInput = styled(NameInput).attrs(() => ({
-  type: 'email'
+  type: 'email',
 }))``;
 
 const PasswordInput = styled(NameInput).attrs(() => ({
-  type: 'password'
+  type: 'password',
 }))``;
 
 const JoinButton = styled(PrimaryButton)``;
@@ -49,15 +48,19 @@ const ErrorMessage = styled.div`
 
 export default function Register() {
   const dispatch = useDispatch();
-  const { register, handleSubmit, errors } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleSignup = data => {
+  const handleSignup = (data) => {
     data.repeatPassword = data.password;
     data.name = data.name.replace(/\s+/, ' ');
     dispatch(signUp(data));
   };
 
-  const emailError = useSelector(state => state.user.error);
+  const emailError = useSelector((state) => state.user.error);
 
   return (
     <Container onSubmit={handleSubmit(handleSignup)}>
@@ -69,12 +72,11 @@ export default function Register() {
         {validateName(errors.name)}
       </ErrorMessage>
       <NameInput
-        name="name"
         placeholder="Full name"
-        ref={register({
+        {...register('name', {
           pattern: /^[A-Za-z ]+$/,
           required: true,
-          maxLength: 50
+          maxLength: 50,
         })}
       />
       <ErrorMessage
@@ -84,13 +86,13 @@ export default function Register() {
         {validateEmail(errors.email) || emailError}
       </ErrorMessage>
       <EmailInput
-        name="email"
         placeholder="Email"
-        ref={register({
-          pattern: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+        {...register('email', {
+          pattern:
+            /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
           required: true,
           minLength: 5,
-          maxLength: 255
+          maxLength: 255,
         })}
       />
       <ErrorMessage
@@ -100,12 +102,11 @@ export default function Register() {
         {validatePassword(errors.password)}
       </ErrorMessage>
       <PasswordInput
-        name="password"
         placeholder="Password"
-        ref={register({
+        {...register('password', {
           required: true,
           minLength: 6,
-          maxLength: 255
+          maxLength: 255,
         })}
       />
       <JoinButton
@@ -118,7 +119,7 @@ export default function Register() {
         style={{
           color: '#36475b',
           fontSize: '.8rem',
-          marginBottom: '.8rem'
+          marginBottom: '.8rem',
         }}
       >
         Already a member? <LoginLink href="/login">Sign In</LoginLink>

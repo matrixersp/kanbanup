@@ -1,17 +1,16 @@
 import { combineReducers } from 'redux';
-import { logout } from 'app/appSlice';
+import appReducer, { logout } from 'app/appSlice';
 import boardReducer from 'features/board/boardSlice';
 import listsReducer from 'features/list/listsSlice';
 import cardsReducer from 'features/card/cardsSlice';
 import userReducer from 'features/user/userSlice';
-import appReducer from 'app/appSlice';
 
 const allReducers = combineReducers({
   cards: cardsReducer,
   lists: listsReducer,
   board: boardReducer,
   user: userReducer,
-  app: appReducer
+  app: appReducer,
 });
 
 export default (state, action) => {

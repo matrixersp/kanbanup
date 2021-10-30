@@ -7,15 +7,8 @@ const { User } = require('../models/user');
 
 function validate(user) {
   const schema = Joi.object({
-    email: Joi.string()
-      .min(5)
-      .max(255)
-      .required()
-      .email(),
-    password: Joi.string()
-      .min(6)
-      .max(255)
-      .required()
+    email: Joi.string().min(5).max(255).required().email(),
+    password: Joi.string().min(6).max(255).required(),
   });
   return schema.validate(user, { abortEarly: false, allowUnknown: true });
 }
@@ -24,7 +17,7 @@ router.post('/', async (req, res) => {
   const { error } = validate(req.body);
   if (error) {
     const errors = [];
-    error.details.forEach(d => errors.push({ error: d.message }));
+    error.details.forEach((d) => errors.push({ error: d.message }));
     return res.status(400).json({ errors });
   }
   const { email, password } = req.body;
@@ -43,7 +36,7 @@ router.post('/', async (req, res) => {
     name: user.name,
     email: user.email,
     boards: user.boards,
-    currentBoard: user.currentBoard
+    currentBoard: user.currentBoard,
   });
 });
 

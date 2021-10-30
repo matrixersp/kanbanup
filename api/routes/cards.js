@@ -17,7 +17,7 @@ router.get('/:id', [auth, validateObjectId], async (req, res) => {
 
   const board = await Board.findOne({
     _id: card.boardId,
-    participants: req.user._id
+    participants: req.user._id,
   });
   if (!board) return res.status(403).json({ error: 'Access forbidden.' });
 
@@ -28,14 +28,14 @@ router.post('/', [auth, validateBoardId, validateListId], async (req, res) => {
   const { error } = validateCard(req.body);
   if (error) {
     const errors = [];
-    error.details.forEach(d => errors.push({ error: d.message }));
+    error.details.forEach((d) => errors.push({ error: d.message }));
     return res.status(400).json({ errors });
   }
 
   const { boardId, listId, title } = req.body;
   const board = await Board.findOne({
     _id: boardId,
-    participants: req.user._id
+    participants: req.user._id,
   });
 
   if (!board)
@@ -43,7 +43,7 @@ router.post('/', [auth, validateBoardId, validateListId], async (req, res) => {
       .status(404)
       .json({ error: 'The board with the given ID was not found.' });
 
-  const index = board.lists.findIndex(l => l._id.toString() === listId);
+  const index = board.lists.findIndex((l) => l._id.toString() === listId);
 
   if (index === -1)
     return res
@@ -68,7 +68,7 @@ async function moveCard(id, userId, source, destination, res) {
 
   const board = await Board.findOne({
     _id: card.boardId,
-    participants: userId
+    participants: userId,
   });
   if (!board)
     return res
@@ -76,10 +76,10 @@ async function moveCard(id, userId, source, destination, res) {
       .json({ error: 'The board with the given ID was not found.' });
 
   const sourceList = board.lists.find(
-    list => list._id.toString() === source.listId
+    (list) => list._id.toString() === source.listId
   );
   const destinationList = board.lists.find(
-    list => list._id.toString() === destination.listId
+    (list) => list._id.toString() === destination.listId
   );
 
   if (!sourceList || !destinationList)
@@ -107,7 +107,7 @@ async function updateTitle(id, userId, title, res) {
 
   const board = await Board.findOne({
     _id: card.boardId,
-    participants: userId
+    participants: userId,
   });
   if (!board)
     return res
@@ -125,7 +125,7 @@ router.patch('/:id', [auth, validateObjectId], async (req, res) => {
 
   if (error) {
     const errors = [];
-    error.details.forEach(d => errors.push({ error: d.message }));
+    error.details.forEach((d) => errors.push({ error: d.message }));
     return res.status(400).json({ errors });
   }
 
@@ -145,7 +145,7 @@ router.delete('/:id', [auth, validateObjectId], async (req, res) => {
     {
       _id: req.body.boardId,
       'lists._id': req.body.listId,
-      participants: req.user._id
+      participants: req.user._id,
     },
     { $pull: { 'lists.$.cards': req.params.id } }
   );

@@ -10,7 +10,7 @@ const userSchema = Schema(
       minLength: 3,
       maxLength: 50,
       required: true,
-      trim: true
+      trim: true,
     },
     email: {
       type: String,
@@ -19,22 +19,22 @@ const userSchema = Schema(
       trim: true,
       validate: {
         validator: validator.isEmail,
-        message: '{VALUE} is not a valid email.'
-      }
+        message: '{VALUE} is not a valid email.',
+      },
     },
     password: { type: String, minLength: 6, maxLength: 255, required: true },
     boards: [
       {
         _id: { type: Schema.Types.ObjectId, ref: 'Board' },
-        title: { type: String, required: true, trim: true }
-      }
+        title: { type: String, required: true, trim: true },
+      },
     ],
-    currentBoard: { type: Schema.Types.ObjectId, ref: 'Board' }
+    currentBoard: { type: Schema.Types.ObjectId, ref: 'Board' },
   },
   { timestamps: true }
 );
 
-userSchema.methods.genAuthToken = function() {
+userSchema.methods.genAuthToken = function () {
   return jwt.sign({ _id: this._id }, process.env.JWT_SECRET);
 };
 
@@ -42,20 +42,10 @@ const User = model('User', userSchema);
 
 function validateUser(user) {
   const schema = Joi.object({
-    name: Joi.string()
-      .min(3)
-      .max(50)
-      .required(),
-    email: Joi.string()
-      .min(5)
-      .max(255)
-      .required()
-      .email(),
-    password: Joi.string()
-      .min(6)
-      .max(255)
-      .required(),
-    repeatPassword: Joi.ref('password')
+    name: Joi.string().min(3).max(50).required(),
+    email: Joi.string().min(5).max(255).required().email(),
+    password: Joi.string().min(6).max(255).required(),
+    repeatPassword: Joi.ref('password'),
   }).with('password', 'repeatPassword');
 
   return schema.validate(user, { abortEarly: false, allowUnknown: true });

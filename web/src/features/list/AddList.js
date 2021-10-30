@@ -1,8 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { TextArea, SecondaryButton, IconWrapper } from 'components/styled';
+import { IconWrapper, SecondaryButton, TextArea } from 'components/styled';
 import { CancelIcon } from 'components/Icons';
 import { toggleAddList } from 'app/appSlice';
 import { addList } from 'features/list/listsSlice';
@@ -35,7 +35,7 @@ const AddListButton = styled(SecondaryButton)`
 `;
 
 function NewList() {
-  const boardId = useSelector(state => state.board._id);
+  const boardId = useSelector((state) => state.board._id);
   const [title, setTitle] = useState('');
   const dispatch = useDispatch();
 
@@ -61,8 +61,8 @@ function NewList() {
         rows="1"
         value={title}
         ref={inputRef}
-        onChange={e => setTitle(e.target.value)}
-        onKeyDown={e => {
+        onChange={(e) => setTitle(e.target.value)}
+        onKeyDown={(e) => {
           if (e.keyCode !== 13 || !e.target.value.trim()) return;
           handleAddList();
         }}

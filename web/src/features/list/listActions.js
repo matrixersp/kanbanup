@@ -1,17 +1,16 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { TertiaryButton, IconWrapper } from 'components/styled';
-import { DeleteIcon, CancelIcon } from 'components/Icons';
+import { IconWrapper, TertiaryButton } from 'components/styled';
+import { CancelIcon, DeleteIcon } from 'components/Icons';
 import { deleteList } from 'features/list/listsSlice';
 import { toggleListActions } from 'app/appSlice';
 
 const ActionsMenu = styled.div`
-  color: ${theme => theme.primaryTextColor || '#36475b'};
-  visibility: ${props => (props.offsetBottom ? 'visible' : 'hidden')};
+  color: ${(theme) => theme.primaryTextColor || '#36475b'};
+  visibility: ${(props) => (props.offsetBottom ? 'visible' : 'hidden')};
   position: absolute;
-  top: ${props => props.offsetBottom};
-  left: ${props => props.offsetLeft};
+  top: ${(props) => props.offsetBottom};
+  left: ${(props) => props.offsetLeft};
   background: #fff;
   min-width: 15.5rem;
   box-shadow: 0 0.063rem 0.375rem 0.063rem #777;
@@ -55,7 +54,7 @@ const Hr = styled.hr`
 export default function ListActions() {
   const dispatch = useDispatch();
   const { id, boardId, ...offsets } = useSelector(
-    state => state.app.listActions
+    (state) => state.app.listActions
   );
 
   const handleDeleteList = () => {

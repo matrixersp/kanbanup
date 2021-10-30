@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
   const { error } = validateUser(req.body);
   if (error) {
     const errors = [];
-    error.details.forEach(d => errors.push({ error: d.message }));
+    error.details.forEach((d) => errors.push({ error: d.message }));
     return res.status(400).json({ errors });
   }
 
@@ -30,14 +30,11 @@ router.post('/', async (req, res) => {
   await user.save();
 
   const token = user.genAuthToken();
-  return res
-    .header('x-auth-token', token)
-    .status(201)
-    .json({
-      _id: user._id,
-      name: user.name,
-      email: user.email
-    });
+  return res.header('x-auth-token', token).status(201).json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+  });
 });
 
 module.exports = router;

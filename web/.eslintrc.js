@@ -9,16 +9,28 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:prettier/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:import/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 13,
+    ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react'],
+  plugins: ['react', 'prettier', 'import'],
   ignorePatterns: ['node_modules'],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+    'import/resolver': {
+      node: {
+        paths: ['src'],
+      },
+    },
+  },
   rules: {
     'prettier/prettier': [
       'error',
@@ -26,11 +38,10 @@ module.exports = {
         singleQuote: true,
         semi: true,
         tabWidth: 2,
-        printWidth: 80,
-        trailingComma: 'all',
+        arrowParens: 'always',
       },
     ],
     'no-underscore-dangle': 'off',
-    'global-require': 'off',
+    'import/order': 'error',
   },
 };

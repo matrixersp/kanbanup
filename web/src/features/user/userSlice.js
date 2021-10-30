@@ -40,13 +40,13 @@ const user = createSlice({
     fetchCurrentUserError(state, { payload }) {
       state.isLoading = false;
       state.error = payload;
-    }
+    },
   },
   extraReducers: {
     [fetchSuccess](state, { payload }) {
       return { ...state, isLoading: false, ...payload.user };
-    }
-  }
+    },
+  },
 });
 
 export const {
@@ -59,38 +59,38 @@ export const {
   fetchCurrentUserStart,
   fetchCurrentUserSuccess,
   fetchCurrentUserError,
-  logout
+  logout,
 } = user.actions;
 
-export const signUp = data => dispatch => {
+export const signUp = (data) => (dispatch) => {
   dispatch(signUpStart());
   axios
     .post(`${BASE_URL}/users`, {
-      ...data
+      ...data,
     })
-    .then(res => {
+    .then((res) => {
       dispatch(
         signUpSuccess({
           token: res.headers['x-auth-token'],
-          ...res.data
+          ...res.data,
         })
       );
       history.push(`/boards`);
     })
-    .catch(err => {
+    .catch((err) => {
       const error =
         err.response.data.error || err.response.data.errors[0].error;
       dispatch(signInError(error));
     });
 };
 
-export const signin = data => dispatch => {
+export const signin = (data) => (dispatch) => {
   dispatch(signInStart());
   axios
     .post(`${BASE_URL}/auth`, {
-      ...data
+      ...data,
     })
-    .then(res => {
+    .then((res) => {
       const user = res.data;
       user.token = res.headers['x-auth-token'];
 
@@ -104,23 +104,23 @@ export const signin = data => dispatch => {
         history.push(`/boards/${boardId}`);
       }
     })
-    .catch(err => {
+    .catch((err) => {
       const error =
         err.response.data.error || err.response.data.errors[0].error;
       dispatch(signInError(error));
     });
 };
 
-export const fetchCurrentUser = () => dispatch => {
+export const fetchCurrentUser = () => (dispatch) => {
   dispatch(fetchCurrentUserStart());
   axios
     .get(`${BASE_URL}/users/current`)
-    .then(res => {
+    .then((res) => {
       const user = res.data;
 
       return dispatch(fetchCurrentUserSuccess(user));
     })
-    .catch(err => dispatch(fetchCurrentUserError(err.response.data)));
+    .catch((err) => dispatch(fetchCurrentUserError(err.response.data)));
 };
 
 export default user.reducer;

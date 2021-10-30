@@ -13,7 +13,7 @@ describe('/api/auth', () => {
     const testUser = new User({
       name: 'User Name',
       email: 'email@domain.com',
-      password: hash
+      password: hash,
     });
     await testUser.save();
   });
@@ -27,12 +27,10 @@ describe('/api/auth', () => {
     it('should authenticate user if the body is valid', async () => {
       const user = {
         email: 'email@domain.com',
-        password: '123456'
+        password: '123456',
       };
 
-      const res = await request(server)
-        .post('/api/auth')
-        .send(user);
+      const res = await request(server).post('/api/auth').send(user);
 
       expect(res.status).toBe(200);
       expect(res.body._id).toBeDefined();
@@ -44,12 +42,10 @@ describe('/api/auth', () => {
     it('should return 400 the body is invalid', async () => {
       const user = {
         email: 'email@domain.com',
-        password: '234567'
+        password: '234567',
       };
 
-      const res = await request(server)
-        .post('/api/auth')
-        .send(user);
+      const res = await request(server).post('/api/auth').send(user);
 
       expect(res.status).toBe(400);
       expect(res.body.error).toBe('Invalid Email or password.');
@@ -58,12 +54,10 @@ describe('/api/auth', () => {
 
   it('should return 400 if a field is missing', async () => {
     const user = {
-      email: 'email@domain.com'
+      email: 'email@domain.com',
     };
 
-    const res = await request(server)
-      .post('/api/auth')
-      .send(user);
+    const res = await request(server).post('/api/auth').send(user);
 
     expect(res.status).toBe(400);
     expect(res.body.errors).toBeDefined();

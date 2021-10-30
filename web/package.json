@@ -5,6 +5,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.24.0",
     "react": "^17.0.2",
@@ -18,16 +19,22 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.0",
     "styled-components": "^5.3.3",
-    "styled-normalize": "^8.0.7"
+    "styled-normalize": "^8.0.7",
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -44,6 +51,7 @@
   "devDependencies": {
     "@testing-library/react": "^12.1.2",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
     "mutationobserver-shim": "^0.3.7",

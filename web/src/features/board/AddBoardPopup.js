@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { TextInput, PrimaryButton } from 'components/styled';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import { IconWrapper, PrimaryButton, TextInput } from 'components/styled';
 import { addBoard } from 'features/board/boardSlice';
-import { IconWrapper } from 'components/styled';
 import { CancelIcon } from 'components/Icons';
 import { toggleAddBoard } from 'app/appSlice';
 
 const OverlayStyled = styled.div`
-  visibility: ${props => (props.isVisible ? 'visible' : 'hidden')};
+  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
   position: fixed;
   top: 0;
   left: 0;
@@ -65,20 +64,20 @@ export default function AddBoardPopup() {
   const [title, setTitle] = useState('');
   const dispatch = useDispatch();
 
-  const handleAddBoard = e => {
+  const handleAddBoard = (e) => {
     e.preventDefault();
     dispatch(addBoard(title));
   };
 
-  const handleClosePopup = e => {
+  const handleClosePopup = (e) => {
     if (e.currentTarget !== e.target) return;
     e.preventDefault();
     dispatch(toggleAddBoard());
   };
 
-  const isVisible = useSelector(state => state.app.isAddBoard);
+  const isVisible = useSelector((state) => state.app.isAddBoard);
 
-  const hasBoard = useSelector(state => state.user.currentBoard);
+  const hasBoard = useSelector((state) => state.user.currentBoard);
 
   useEffect(() => {
     if (!hasBoard) dispatch(toggleAddBoard());
@@ -100,7 +99,7 @@ export default function AddBoardPopup() {
         <TitleInput
           placeholder="Enter board title"
           value={title}
-          onChange={e => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <AddButton as="input" type="submit" value="Add Board" />
       </Container>

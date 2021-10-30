@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 import BoardHeader from 'features/board/BoardHeader';
 import Lists from 'features/list/Lists';
 import EditCardPopup from 'features/card/EditCardPopup';
@@ -8,7 +9,6 @@ import ListActions from 'features/list/listActions';
 import { toggleListActions } from 'app/appSlice';
 import { isNonEmptyObject } from 'helpers/dom';
 import { fetchBoard } from 'features/board/boardSlice';
-import { useParams } from 'react-router-dom';
 
 const Main = styled.main`
   display: flex;
@@ -19,12 +19,12 @@ const Main = styled.main`
 
 export default function Home() {
   const dispatch = useDispatch();
-  const listActions = useSelector(state => state.app.listActions);
+  const listActions = useSelector((state) => state.app.listActions);
   const clearPopup = () => {
     if (isNonEmptyObject(listActions)) dispatch(toggleListActions());
   };
 
-  const isLoading = useSelector(state => state.user.isLoading);
+  const isLoading = useSelector((state) => state.user.isLoading);
   const params = useParams();
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function Home() {
               style={{
                 position: 'relative',
                 height: '100%',
-                overflowX: 'auto'
+                overflowX: 'auto',
               }}
             >
               <Lists />

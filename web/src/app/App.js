@@ -1,7 +1,6 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Redirect, Route, Router, Switch } from 'react-router-dom';
 import history from 'helpers/history';
 
 import Header from 'components/Header';
@@ -27,8 +26,8 @@ const Root = styled.div`
 `;
 
 export default function App() {
-  const token = useSelector(state => state.user.token);
-  const isLoading = useSelector(state => state.user.isLoading);
+  const token = useSelector((state) => state.user.token);
+  const isLoading = useSelector((state) => state.user.isLoading);
 
   setAuthorizationHeader();
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -33,9 +32,9 @@ const AddCardButton = styled(TertiaryButton)`
 
 export default function Cards({ listId }) {
   const dispatch = useDispatch();
-  const cards = useSelector(state => {
+  const cards = useSelector((state) => {
     const cardIds = state.lists.byId[listId].cards;
-    return cardIds.map(id => state.cards.byId[id]);
+    return cardIds.map((id) => state.cards.byId[id]);
   });
 
   const renderCards = () => {
@@ -44,7 +43,7 @@ export default function Cards({ listId }) {
     });
   };
 
-  const listToAddCard = useSelector(state => state.app.listToAddCard);
+  const listToAddCard = useSelector((state) => state.app.listToAddCard);
 
   let isAddCard = false;
   if (listToAddCard && listToAddCard === listId) isAddCard = true;
@@ -52,7 +51,7 @@ export default function Cards({ listId }) {
   return (
     <>
       <Droppable key={listId} droppableId={listId}>
-        {provided => (
+        {(provided) => (
           <CardsWrapper ref={provided.innerRef} {...provided.droppableProps}>
             {renderCards()}
             {isAddCard && <AddCard />}
@@ -66,7 +65,7 @@ export default function Cards({ listId }) {
             <AddIcon
               style={{
                 fill: '#364756',
-                marginRight: '0.35rem'
+                marginRight: '0.35rem',
               }}
             />
             {cards.length > 0 ? 'Add another card' : 'Add a card'}
@@ -78,5 +77,5 @@ export default function Cards({ listId }) {
 }
 
 Cards.propTypes = {
-  listId: PropTypes.string
+  listId: PropTypes.string,
 };
