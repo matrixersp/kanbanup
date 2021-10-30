@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
 

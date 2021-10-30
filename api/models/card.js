@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 
 const Card = model(
   'Card',
