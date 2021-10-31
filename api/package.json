@@ -25,8 +25,8 @@
     "supertest": "^6.1.6"
   },
   "scripts": {
-    "test": "jest --watchAll tests/*.test.js --runInBand --verbose",
     "start": "nodemon server.js",
+    "test": "jest --watchAll tests/*.test.js --runInBand --verbose",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix"
   },

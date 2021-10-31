@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  web:
+    build: ./web
+    depends_on:
+      - api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web:/home/web
+  api:
+    build: ./api
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+    environment:
+      KANBANUP_DB_URI: mongodb://db:27017/kanbanup
+    volumes:
+      - ./api:/home/api
+    command: sh -c './wait-for db:27017 -- npm start'
+  db:
+    image: mongo:4.4.10-focal
+    environment:
+      - MONGO_INITDB_DATABASE=kanbanup
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb:/data/db
+
+volumes:
+  mongodb:
