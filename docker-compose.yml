@@ -8,7 +8,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./web:/home/web
+      - ./web:/home/node/web
   api:
     build: ./api
     depends_on:
@@ -18,7 +18,7 @@ services:
     environment:
       KANBANUP_DB_URI: mongodb://db:27017/kanbanup
     volumes:
-      - ./api:/home/api
+      - ./api:/home/node/api
     command: sh -c './wait-for db:27017 -- npm start'
   db:
     image: mongo:4.4.10-focal
